@@ -310,9 +310,9 @@
     }
 
     /* ══════════════════════════════════════
-       PHONE CONTROLS — complete redesign
-       Layout: D-pad bottom-left, Action buttons bottom-right
-       Special floats above the action cluster, fully visible
+       PHONE CONTROLS — REDESIGNED
+       LEFT: Square D-Pad for movement
+       RIGHT: Rounded buttons for D, A, S
        ══════════════════════════════════════ */
 
     #phoneControls {
@@ -320,30 +320,39 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 160px;           /* fixed zone so nothing clips */
+      height: 180px;
       z-index: 50;
       display: none;
-      pointer-events: none;    /* children opt-in */
-      background: linear-gradient(to top, rgba(4,3,16,.55) 0%, transparent 100%);
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(4,3,16,.90) 0%, rgba(4,3,16,.60) 50%, transparent 100%);
+      padding: 0 16px 16px 16px;
+      box-sizing: border-box;
     }
 
-    /* ── D-PAD — anchored bottom-left ── */
+    /* ── SQUARE D-PAD (LEFT SIDE) ── */
     #dpad {
       position: absolute;
-      bottom: 12px;
-      left: 12px;
+      bottom: 16px;
+      left: 16px;
       pointer-events: all;
       display: grid;
-      grid-template-columns: repeat(3, 54px);
-      grid-template-rows:    repeat(3, 54px);
-      gap: 4px;
-    }
-    .dpad-btn {
-      background: rgba(10,8,28,.78);
-      border: 1.5px solid rgba(255,255,255,.20);
+      grid-template-columns: repeat(3, 70px);
+      grid-template-rows: repeat(3, 70px);
+      gap: 8px;
+      background: rgba(20,15,40,.45);
+      padding: 12px;
       border-radius: 12px;
-      color: rgba(255,255,255,.90);
-      font-size: 1.15rem;
+      border: 2px solid rgba(163,212,247,.25);
+      backdrop-filter: blur(12px);
+    }
+
+    .dpad-btn {
+      background: rgba(60,100,180,.25);
+      border: 2px solid rgba(163,212,247,.40);
+      border-radius: 8px;
+      color: #a3d4f7;
+      font-size: 1.4rem;
+      font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -351,23 +360,24 @@
       -webkit-tap-highlight-color: transparent;
       user-select: none;
       touch-action: none;
-      backdrop-filter: blur(8px);
-      transition: background .08s, transform .07s, border-color .08s;
+      transition: all .1s ease;
     }
+
     .dpad-btn:active,
     .dpad-btn.pressed {
-      background: rgba(163,212,247,.28);
-      border-color: rgba(163,212,247,.70);
-      transform: scale(.90);
-      box-shadow: 0 0 12px rgba(163,212,247,.4);
+      background: rgba(100,160,255,.55);
+      border-color: rgba(163,212,247,.95);
+      transform: scale(.88);
+      box-shadow: 0 0 16px rgba(163,212,247,.65), inset 0 0 8px rgba(255,255,255,.15);
     }
+
     .dpad-center {
-      background: rgba(255,255,255,.05) !important;
-      border-color: rgba(255,255,255,.10) !important;
+      background: rgba(255,255,255,.02) !important;
+      border-color: rgba(255,255,255,.05) !important;
       pointer-events: none !important;
-      border-radius: 12px;
       box-shadow: none !important;
     }
+
     .dpad-empty {
       background: transparent !important;
       border: none !important;
@@ -375,104 +385,102 @@
       box-shadow: none !important;
     }
 
-    /* ── ACTION PAD — anchored bottom-right ── */
-    /* Three buttons in a triangle:
-         [SPECIAL]   ← top-center
-       [DEF]  [ATK]  ← bottom row
-    */
+    /* ── ROUNDED ACTION BUTTONS (RIGHT SIDE) ── */
     #actionPad {
       position: absolute;
-      bottom: 12px;
-      right: 12px;
+      bottom: 16px;
+      right: 16px;
       pointer-events: all;
-      width: 178px;    /* wide enough for 2 buttons + gap */
-      height: 178px;   /* tall enough for 2 rows + special above */
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
     }
 
     .action-btn {
-      position: absolute;
+      position: relative;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      border: 2px solid transparent;
+      border: 2.5px solid transparent;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2px;
+      gap: 4px;
       cursor: pointer;
-      font-family: 'Nunito', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       font-weight: 900;
+      font-size: 1.8rem;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
       touch-action: none;
-      backdrop-filter: blur(8px);
-      transition: transform .08s, box-shadow .18s, background .12s, border-color .12s;
+      backdrop-filter: blur(12px);
+      transition: all .1s ease;
     }
-    .action-btn .ab-icon  { font-size: 1.15rem; line-height: 1; }
-    .action-btn .ab-label { font-size: .60rem; letter-spacing: .05em; opacity: .85; }
-    .action-btn:active    { transform: scale(.86) !important; }
 
-    /* DEFEND — bottom-left of pad */
+    .action-btn .ab-icon { font-size: 2rem; line-height: 1; }
+    .action-btn .ab-label { font-size: 0; }
+    .action-btn:active { transform: scale(.85) !important; }
+
+    /* DEFEND (D) — Blue, Rounded */
     #phoneDefendBtn {
-      width: 72px;
-      height: 72px;
-      bottom: 0;
-      left: 0;
-      background: rgba(60,90,220,.32);
-      border-color: rgba(140,160,255,.55);
+      background: linear-gradient(135deg, rgba(80,120,255,.35), rgba(100,140,255,.25));
+      border-color: rgba(140,180,255,.65);
       color: #a3d4f7;
-      box-shadow: 0 0 10px rgba(100,140,255,.25);
+      box-shadow: 0 0 20px rgba(100,140,255,.45), 0 8px 20px rgba(0,0,0,.3);
     }
+
     #phoneDefendBtn:active,
     #phoneDefendBtn.active {
-      background: rgba(80,120,255,.55);
-      border-color: rgba(160,190,255,.95);
-      box-shadow: 0 0 22px rgba(100,160,255,.7), 0 0 44px rgba(100,160,255,.3);
+      background: linear-gradient(135deg, rgba(100,160,255,.75), rgba(120,180,255,.60));
+      border-color: rgba(180,210,255,.95);
+      box-shadow: 0 0 28px rgba(100,160,255,.85), 0 0 50px rgba(100,160,255,.4), 0 8px 20px rgba(0,0,0,.4);
     }
 
-    /* ATTACK — bottom-right of pad */
+    /* ATTACK (A) — Red/Pink, Rounded */
     #phoneAttackBtn {
-      width: 72px;
-      height: 72px;
-      bottom: 0;
-      right: 0;
-      background: rgba(200,40,70,.32);
-      border-color: rgba(247,96,122,.55);
+      background: linear-gradient(135deg, rgba(240,60,90,.35), rgba(247,96,122,.25));
+      border-color: rgba(247,130,150,.65);
       color: #f7a3b8;
-      box-shadow: 0 0 10px rgba(247,96,122,.25);
-    }
-    #phoneAttackBtn:active {
-      background: rgba(240,60,90,.55);
-      border-color: rgba(255,130,150,.95);
-      box-shadow: 0 0 22px rgba(247,96,122,.7), 0 0 44px rgba(247,96,122,.3);
+      box-shadow: 0 0 20px rgba(247,96,122,.45), 0 8px 20px rgba(0,0,0,.3);
     }
 
-    /* SPECIAL — top-center, perfectly centered above the two bottom buttons */
-    #phoneSpecialBtn {
-      width: 66px;
-      height: 66px;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.28);
-      color: rgba(255,255,255,.45);
-      font-size: .62rem;
-      box-shadow: 0 0 8px rgba(255,255,255,.1);
+    #phoneAttackBtn:active {
+      background: linear-gradient(135deg, rgba(255,100,130,.75), rgba(255,130,160,.60));
+      border-color: rgba(255,170,190,.95);
+      box-shadow: 0 0 28px rgba(247,96,122,.85), 0 0 50px rgba(247,96,122,.4), 0 8px 20px rgba(0,0,0,.4);
     }
-    #phoneSpecialBtn .ab-icon { font-size: 1.2rem; }
+
+    /* SPECIAL (S) — Gold, Rounded, Top Position */
+    #phoneSpecialBtn {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(247,217,138,.25), rgba(255,200,100,.15));
+      border-color: rgba(247,217,138,.40);
+      color: rgba(247,217,138,.60);
+      box-shadow: 0 0 16px rgba(247,217,138,.25), 0 8px 20px rgba(0,0,0,.3);
+    }
+
     #phoneSpecialBtn.spec-ready {
-      background: rgba(247,217,138,.24);
+      background: linear-gradient(135deg, rgba(247,217,138,.50), rgba(255,220,150,.40));
       border-color: #f7d98a;
       color: #f7d98a;
-      box-shadow: 0 0 18px rgba(247,217,138,.75), 0 0 40px rgba(247,217,138,.35);
+      box-shadow: 0 0 28px rgba(247,217,138,.85), 0 0 50px rgba(247,217,138,.45), 0 8px 20px rgba(0,0,0,.3);
       animation: phoneSpecPulse .85s ease-in-out infinite alternate;
     }
+
     @keyframes phoneSpecPulse {
-      from { box-shadow: 0 0 14px rgba(247,217,138,.6),  0 0 32px rgba(247,217,138,.25); }
-      to   { box-shadow: 0 0 28px rgba(247,217,138,1.0), 0 0 60px rgba(247,217,138,.55); }
+      from { 
+        box-shadow: 0 0 20px rgba(247,217,138,.6), 0 0 40px rgba(247,217,138,.25), 0 8px 20px rgba(0,0,0,.3); 
+      }
+      to { 
+        box-shadow: 0 0 32px rgba(247,217,138,1.0), 0 0 60px rgba(247,217,138,.55), 0 8px 20px rgba(0,0,0,.3);
+      }
     }
+
     #phoneSpecialBtn:active {
-      transform: translateX(-50%) scale(.86) !important;
+      transform: scale(.85) !important;
     }
 
     /* Old control panel — hidden always now */
@@ -683,7 +691,7 @@
 
 <!-- ── PHONE CONTROLS ── -->
 <div id="phoneControls">
-  <!-- LEFT: D-PAD -->
+  <!-- LEFT: D-PAD for MOVEMENT -->
   <div id="dpad">
     <div class="dpad-btn dpad-empty"></div>
     <div class="dpad-btn" id="dpadUp">▲</div>
@@ -692,22 +700,22 @@
     <div class="dpad-btn dpad-center"></div>
     <div class="dpad-btn" id="dpadRight">▶</div>
     <div class="dpad-btn dpad-empty"></div>
-    <div class="dpad-btn dpad-empty" style="opacity:.15;pointer-events:none;font-size:.8rem;">▼</div>
+    <div class="dpad-btn dpad-empty"></div>
     <div class="dpad-btn dpad-empty"></div>
   </div>
 
-  <!-- RIGHT: Action pad — triangle: SPECIAL top-center, DEF bottom-left, ATK bottom-right -->
+  <!-- RIGHT: Action buttons (D, A, S) -->
   <div id="actionPad">
     <button class="action-btn" id="phoneSpecialBtn">
-      <span class="ab-icon">✨</span>
+      <span class="ab-icon">S</span>
       <span class="ab-label">SPEC</span>
     </button>
     <button class="action-btn" id="phoneDefendBtn">
-      <span class="ab-icon">🛡</span>
+      <span class="ab-icon">D</span>
       <span class="ab-label">DEF</span>
     </button>
     <button class="action-btn" id="phoneAttackBtn">
-      <span class="ab-icon">⚡</span>
+      <span class="ab-icon">A</span>
       <span class="ab-label">ATK</span>
     </button>
   </div>
@@ -1054,6 +1062,12 @@ function chooseCharacter(ch){
   document.getElementById('gameHud').style.display='flex';
   velaEl.style.display='';glokEl.style.display='';
   initControls();
+  
+  // Trigger fullscreen on phones immediately
+  if(IS_PHONE) {
+    setTimeout(() => requestFullscreen(), 50);
+  }
+  
   if(ch==='vela'){
     velaX=6;glokX=72;glokTgtX=72;velaDir=1;glokDir=-1;
     document.getElementById('p1Name').textContent='✦ VELA';
