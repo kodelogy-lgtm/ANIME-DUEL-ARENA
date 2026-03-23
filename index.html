@@ -1079,12 +1079,30 @@ function chooseCharacter(ch){
     document.getElementById('p1Name').style.color='#a8edca';
     document.getElementById('p2Name').textContent='GLOK ✦';
     document.getElementById('p2Name').style.color='#f7a3b8';
+    // Health bars: p1 (left) = vela, p2 (right) = glok
+    velaBarEl=document.getElementById('velaBar');
+    velaHpTxt=document.getElementById('velaHpText');
+    velaStEl=document.getElementById('velaStamina');
+    vPip=document.getElementById('velaSpecialPip');
+    glokBarEl=document.getElementById('glokBar');
+    glokHpTxt=document.getElementById('glokHpText');
+    glokStEl=document.getElementById('glokStamina');
+    gPip=document.getElementById('glokSpecialPip');
   }else{
     glokX=6;glokTgtX=6;velaX=72;glokDir=1;velaDir=-1;
     document.getElementById('p1Name').textContent='GLOK ✦';
     document.getElementById('p1Name').style.color='#f7a3b8';
     document.getElementById('p2Name').textContent='✦ VELA';
     document.getElementById('p2Name').style.color='#a8edca';
+    // Health bars: p1 (left) = glok, p2 (right) = vela
+    velaBarEl=document.getElementById('glokBar');
+    velaHpTxt=document.getElementById('glokHpText');
+    velaStEl=document.getElementById('glokStamina');
+    vPip=document.getElementById('glokSpecialPip');
+    glokBarEl=document.getElementById('velaBar');
+    glokHpTxt=document.getElementById('velaHpText');
+    glokStEl=document.getElementById('velaStamina');
+    gPip=document.getElementById('velaSpecialPip');
   }
   schedPSpec();schedBSpec();
   applyVT();applyGT();
