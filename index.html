@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Anime Duel Arena</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
@@ -13,6 +13,75 @@
     #arenaBg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,transparent 25%,transparent 75%,rgba(0,0,0,.38) 100%);}
     @keyframes screenShake{0%{transform:translate(0,0)}15%{transform:translate(-6px,-4px)}30%{transform:translate(7px,3px)}50%{transform:translate(-4px,5px)}70%{transform:translate(4px,-3px)}85%{transform:translate(-2px,2px)}100%{transform:translate(0,0)}}
     body.shaking{animation:screenShake .28s ease-out;}
+
+    /* ══════════════════════════════════════
+       ROTATE OVERLAY — shown on phones in portrait
+       ══════════════════════════════════════ */
+    #rotateOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, rgba(4,3,16,.98), rgba(10,6,28,.98));
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.6rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    #rotateOverlay .rotate-icon {
+      font-size: 5rem;
+      animation: rotateAnim 1.8s cubic-bezier(.22,1,.36,1) infinite;
+      filter: drop-shadow(0 0 24px rgba(163,212,247,.9));
+    }
+    @keyframes rotateAnim {
+      0%   { transform: rotate(0deg) scale(1);   }
+      35%  { transform: rotate(90deg) scale(1.12); }
+      60%  { transform: rotate(90deg) scale(1.06); }
+      80%  { transform: rotate(90deg) scale(1);   }
+      100% { transform: rotate(0deg) scale(1);   }
+    }
+    #rotateOverlay .rotate-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #a8edca, #a3d4f7, #f7a3b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #rotateOverlay .rotate-sub {
+      font-size: .85rem;
+      opacity: .55;
+      letter-spacing: .08em;
+      line-height: 1.6;
+      max-width: 260px;
+    }
+    #rotateOverlay .rotate-arrows {
+      display: flex;
+      gap: 1rem;
+      margin-top: .4rem;
+    }
+    #rotateOverlay .rotate-arrow {
+      font-size: 1.6rem;
+      opacity: .45;
+      animation: arrowBounce 1.2s ease-in-out infinite alternate;
+    }
+    #rotateOverlay .rotate-arrow:nth-child(1) { animation-delay: 0s; }
+    #rotateOverlay .rotate-arrow:nth-child(2) { animation-delay: .4s; }
+    #rotateOverlay .rotate-arrow:nth-child(3) { animation-delay: .8s; }
+    @keyframes arrowBounce {
+      from { opacity: .25; transform: translateX(-4px); }
+      to   { opacity: .8;  transform: translateX(4px);  }
+    }
+    /* Portrait detection: show overlay only on phones in portrait */
+    @media (max-width: 767px) and (orientation: portrait) {
+      #rotateOverlay { display: flex; }
+    }
+    /* Also hide via JS for finer control */
 
     /* ── SELECT SCREEN ── */
     #selectScreen{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;background:linear-gradient(135deg,rgba(4,3,16,.97),rgba(10,6,28,.97));}
@@ -292,8 +361,6 @@
       width: 164px;
       height: 164px;
     }
-    /* Invisible reference square — the "frame you can't see" */
-    /* Defend = bottom-left, Attack = top-right, Special = center-top (higher up) */
     .action-btn {
       position: absolute;
       width: 56px;
@@ -319,7 +386,6 @@
     .action-btn .ab-label { font-size: .58rem; letter-spacing: .06em; }
     .action-btn:active { transform: scale(.9); }
 
-    /* Defend — bottom-left of the action square */
     #phoneDefendBtn {
       bottom: 0;
       left: 0;
@@ -333,7 +399,6 @@
       box-shadow: 0 0 20px rgba(100,150,255,.6);
     }
 
-    /* Attack — top-right of the action square */
     #phoneAttackBtn {
       top: 0;
       right: 0;
@@ -342,17 +407,12 @@
       color: #f7a3b8;
     }
 
-    /* Special — horizontally centered, above attack, more gap than D-A gap */
     #phoneSpecialBtn {
-      /* center horizontally in the 164px wide pad */
       left: 50%;
       transform: translateX(-50%);
-      /* vertically: positioned above attack btn (top:0 + 56px + gap) */
-      /* Attack is at top:0, so special is higher = negative top */
       top: -72px;
       width: 60px;
       height: 60px;
-      /* Default: white/inactive */
       background: rgba(255,255,255,.08);
       border-color: rgba(255,255,255,.25);
       color: rgba(255,255,255,0.4);
@@ -388,6 +448,20 @@
   </style>
 </head>
 <body>
+
+<!-- ══════════════════════════════════
+     ROTATE OVERLAY (phones in portrait)
+     ══════════════════════════════════ -->
+<div id="rotateOverlay">
+  <div class="rotate-icon">📱</div>
+  <div class="rotate-title">Rotate to Play</div>
+  <div class="rotate-sub">Tilt your phone sideways to enter landscape mode and start the duel!</div>
+  <div class="rotate-arrows">
+    <span class="rotate-arrow">↺</span>
+    <span class="rotate-arrow">↻</span>
+    <span class="rotate-arrow">↺</span>
+  </div>
+</div>
 
 <div id="arenaBg"></div>
 <canvas id="shardCanvas"></canvas>
@@ -514,35 +588,27 @@
 
 <!-- ── PHONE CONTROLS ── -->
 <div id="phoneControls">
-  <!-- LEFT: D-PAD -->
   <div id="dpad">
-    <!-- Row 1: empty, up, empty -->
     <div class="dpad-btn dpad-empty"></div>
     <div class="dpad-btn" id="dpadUp" data-action="jump">▲</div>
     <div class="dpad-btn dpad-empty"></div>
-    <!-- Row 2: left, center-dot, right -->
     <div class="dpad-btn" id="dpadLeft" data-action="left">◀</div>
     <div class="dpad-center dpad-btn"></div>
     <div class="dpad-btn" id="dpadRight" data-action="right">▶</div>
-    <!-- Row 3: empty, down (unused, visual only), empty -->
     <div class="dpad-btn dpad-empty"></div>
     <div class="dpad-btn dpad-empty" style="opacity:.2;pointer-events:none;">▼</div>
     <div class="dpad-btn dpad-empty"></div>
   </div>
 
-  <!-- RIGHT: Action pad (invisible 164x164 frame) -->
   <div id="actionPad">
-    <!-- Special (top-center, above attack, more space) -->
     <button class="action-btn" id="phoneSpecialBtn">
       <span class="ab-icon">✨</span>
       <span class="ab-label">S</span>
     </button>
-    <!-- Defend (bottom-left) -->
     <button class="action-btn" id="phoneDefendBtn">
       <span class="ab-icon">🛡</span>
       <span class="ab-label">D</span>
     </button>
-    <!-- Attack (top-right) -->
     <button class="action-btn" id="phoneAttackBtn">
       <span class="ab-icon">⚡</span>
       <span class="ab-label">A</span>
@@ -561,6 +627,41 @@
 <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
 
 <script>
+/* ════════════════════════
+   ORIENTATION LOCK FOR PHONES
+════════════════════════ */
+const rotateOverlay = document.getElementById('rotateOverlay');
+
+function checkOrientation() {
+  const phone = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || (window.innerWidth < 900 && 'ontouchstart' in window);
+
+  if (!phone) {
+    rotateOverlay.style.display = 'none';
+    return;
+  }
+
+  const isPortrait = window.innerHeight > window.innerWidth;
+  rotateOverlay.style.display = isPortrait ? 'flex' : 'none';
+}
+
+// Check on load
+checkOrientation();
+
+// Check whenever orientation/resize changes
+window.addEventListener('resize', checkOrientation);
+window.addEventListener('orientationchange', () => {
+  // Small delay to let the browser finish the rotation
+  setTimeout(checkOrientation, 150);
+});
+
+// Screen Orientation API (modern browsers)
+if (screen.orientation) {
+  screen.orientation.addEventListener('change', () => {
+    setTimeout(checkOrientation, 150);
+  });
+}
+
 /* ════════════════════════
    DEVICE DETECTION
 ════════════════════════ */
@@ -746,7 +847,6 @@ const deptHoleEl=document.getElementById('departureHole');
 const iceEl=document.getElementById('iceBox');
 const vPip=document.getElementById('velaSpecialPip'),gPip=document.getElementById('glokSpecialPip');
 
-// New responsive elements
 const laptopSpecBtn = document.getElementById('laptopSpecialBtn');
 const phoneSpecBtn = document.getElementById('phoneSpecialBtn');
 
@@ -857,7 +957,6 @@ function pose(el,p){el.classList.remove('stand','walk','hit','block','attack-ani
 function setPip(who,rdy){
   if(who==='p'){
     vPip.className='special-pip'+(rdy?' ready':'');
-    // Update both special buttons' ready states
     if(laptopSpecBtn) laptopSpecBtn.classList.toggle('spec-ready', rdy);
     if(phoneSpecBtn) phoneSpecBtn.classList.toggle('spec-ready', rdy);
   } else {
@@ -1298,7 +1397,6 @@ document.getElementById('laptopSpecialBtn').addEventListener('click',doPlayerSpe
 /* ════════════════════════
    PHONE TOUCH CONTROLS
 ════════════════════════ */
-// D-pad touch handling
 const dpadHeld = { left: false, right: false, jump: false };
 let dpadInterval = null;
 
@@ -1351,7 +1449,6 @@ setupDpadBtn('dpadLeft', 'left');
 setupDpadBtn('dpadRight', 'right');
 setupDpadBtn('dpadUp', 'jump');
 
-// Action buttons
 function setupActionBtn(id, downFn, upFn){
   const el = document.getElementById(id);
   if(!el) return;
