@@ -1,0 +1,2 @@
+# ANIME-DUEL-ARENA
+Anime Duel Arena is a browser-based 2D fighting game built using HTML, CSS, and JavaScript. The game features two characters, Vela and Glok, battling in an arena with movement, attacks, defense mechanics, health bars, special abilities, sound effects, and a countdown fight system. It includes a player vs bot mode with basic AI, visual strike effects, and a 50-second timer. This project was created as a learning experiment in game mechanics, UI design, and JavaScript-based game development.
