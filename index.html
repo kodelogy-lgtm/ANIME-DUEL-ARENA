@@ -310,8 +310,8 @@
     }
 
     /* ══════════════════════════════════════
-       PHONE CONTROLS — REDESIGNED
-       LEFT: Square D-Pad for movement
+       PHONE CONTROLS — OPTIMIZED
+       LEFT: D-Pad for movement (easy to play)
        RIGHT: Rounded buttons for D, A, S
        ══════════════════════════════════════ */
 
@@ -320,11 +320,11 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 240px;
+      height: 200px;
       z-index: 50;
       display: none;
       pointer-events: none;
-      background: linear-gradient(to top, rgba(4,3,16,.90) 0%, rgba(4,3,16,.50) 60%, transparent 100%);
+      background: linear-gradient(to top, rgba(4,3,16,.70) 0%, rgba(4,3,16,.35) 50%, transparent 100%);
       padding: 0 12px 12px 12px;
       box-sizing: border-box;
     }
@@ -336,22 +336,22 @@
       left: 12px;
       pointer-events: all;
       display: grid;
-      grid-template-columns: repeat(3, 50px);
-      grid-template-rows: repeat(3, 50px);
+      grid-template-columns: repeat(3, 60px);
+      grid-template-rows: repeat(3, 60px);
       gap: 6px;
-      background: rgba(20,15,40,.45);
+      background: rgba(20,15,40,.30);
       padding: 8px;
       border-radius: 10px;
-      border: 2px solid rgba(163,212,247,.25);
-      backdrop-filter: blur(12px);
+      border: 2px solid rgba(163,212,247,.20);
+      backdrop-filter: blur(8px);
     }
 
     .dpad-btn {
-      background: rgba(60,100,180,.25);
-      border: 2px solid rgba(163,212,247,.40);
+      background: rgba(60,100,180,.20);
+      border: 2px solid rgba(163,212,247,.35);
       border-radius: 6px;
       color: #a3d4f7;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 900;
       display: flex;
       align-items: center;
@@ -365,10 +365,10 @@
 
     .dpad-btn:active,
     .dpad-btn.pressed {
-      background: rgba(100,160,255,.55);
-      border-color: rgba(163,212,247,.95);
-      transform: scale(.85);
-      box-shadow: 0 0 12px rgba(163,212,247,.65), inset 0 0 6px rgba(255,255,255,.15);
+      background: rgba(100,160,255,.50);
+      border-color: rgba(163,212,247,.90);
+      transform: scale(.88);
+      box-shadow: 0 0 14px rgba(163,212,247,.70), inset 0 0 6px rgba(255,255,255,.10);
     }
 
     .dpad-center {
@@ -392,8 +392,8 @@
       bottom: 12px;
       right: 12px;
       pointer-events: all;
-      width: 190px;
-      height: 220px;
+      width: 170px;
+      height: 190px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -403,10 +403,10 @@
 
     .action-btn {
       position: absolute;
-      width: 70px;
-      height: 70px;
+      width: 65px;
+      height: 65px;
       border-radius: 50%;
-      border: 2.5px solid transparent;
+      border: 2.2px solid transparent;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -415,81 +415,81 @@
       cursor: pointer;
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
       touch-action: none;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(8px);
       transition: all .1s ease;
     }
 
-    .action-btn .ab-icon { font-size: 2rem; line-height: 1; }
+    .action-btn .ab-icon { font-size: 1.8rem; line-height: 1; }
     .action-btn .ab-label { font-size: 0; }
-    .action-btn:active { transform: scale(.80) !important; }
+    .action-btn:active { transform: scale(.82) !important; }
 
     /* SPECIAL (S) — Gold, Top Position */
     #phoneSpecialBtn {
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(135deg, rgba(247,217,138,.25), rgba(255,200,100,.15));
-      border-color: rgba(247,217,138,.40);
-      color: rgba(247,217,138,.60);
-      box-shadow: 0 0 16px rgba(247,217,138,.25), 0 6px 15px rgba(0,0,0,.3);
+      background: linear-gradient(135deg, rgba(247,217,138,.18), rgba(255,200,100,.10));
+      border-color: rgba(247,217,138,.30);
+      color: rgba(247,217,138,.50);
+      box-shadow: 0 0 12px rgba(247,217,138,.15), 0 6px 12px rgba(0,0,0,.25);
     }
 
     #phoneSpecialBtn.spec-ready {
-      background: linear-gradient(135deg, rgba(247,217,138,.50), rgba(255,220,150,.40));
-      border-color: #f7d98a;
+      background: linear-gradient(135deg, rgba(247,217,138,.38), rgba(255,220,150,.28));
+      border-color: rgba(247,217,138,.80);
       color: #f7d98a;
-      box-shadow: 0 0 28px rgba(247,217,138,.85), 0 0 50px rgba(247,217,138,.45), 0 6px 15px rgba(0,0,0,.3);
+      box-shadow: 0 0 20px rgba(247,217,138,.70), 0 0 40px rgba(247,217,138,.30), 0 6px 12px rgba(0,0,0,.25);
       animation: phoneSpecPulse .85s ease-in-out infinite alternate;
     }
 
     @keyframes phoneSpecPulse {
       from { 
-        box-shadow: 0 0 20px rgba(247,217,138,.6), 0 0 40px rgba(247,217,138,.25), 0 6px 15px rgba(0,0,0,.3); 
+        box-shadow: 0 0 16px rgba(247,217,138,.5), 0 0 32px rgba(247,217,138,.20), 0 6px 12px rgba(0,0,0,.25); 
       }
       to { 
-        box-shadow: 0 0 32px rgba(247,217,138,1.0), 0 0 60px rgba(247,217,138,.55), 0 6px 15px rgba(0,0,0,.3);
+        box-shadow: 0 0 26px rgba(247,217,138,.90), 0 0 50px rgba(247,217,138,.45), 0 6px 12px rgba(0,0,0,.25);
       }
     }
 
     #phoneSpecialBtn:active {
-      transform: translateX(-50%) scale(.80) !important;
+      transform: translateX(-50%) scale(.82) !important;
     }
 
     /* DEFEND (D) — Blue, Bottom-Left */
     #phoneDefendBtn {
       bottom: 0;
       left: 0;
-      background: linear-gradient(135deg, rgba(80,120,255,.35), rgba(100,140,255,.25));
-      border-color: rgba(140,180,255,.65);
+      background: linear-gradient(135deg, rgba(80,120,255,.25), rgba(100,140,255,.15));
+      border-color: rgba(140,180,255,.50);
       color: #a3d4f7;
-      box-shadow: 0 0 16px rgba(100,140,255,.35), 0 6px 15px rgba(0,0,0,.3);
+      box-shadow: 0 0 12px rgba(100,140,255,.25), 0 6px 12px rgba(0,0,0,.25);
     }
 
     #phoneDefendBtn:active,
     #phoneDefendBtn.active {
-      background: linear-gradient(135deg, rgba(100,160,255,.75), rgba(120,180,255,.60));
-      border-color: rgba(180,210,255,.95);
-      box-shadow: 0 0 24px rgba(100,160,255,.75), 0 0 40px rgba(100,160,255,.35), 0 6px 15px rgba(0,0,0,.4);
+      background: linear-gradient(135deg, rgba(100,160,255,.60), rgba(120,180,255,.50));
+      border-color: rgba(180,210,255,.90);
+      box-shadow: 0 0 18px rgba(100,160,255,.65), 0 0 35px rgba(100,160,255,.30), 0 6px 12px rgba(0,0,0,.3);
     }
 
     /* ATTACK (A) — Red/Pink, Bottom-Right */
     #phoneAttackBtn {
       bottom: 0;
       right: 0;
-      background: linear-gradient(135deg, rgba(240,60,90,.35), rgba(247,96,122,.25));
-      border-color: rgba(247,130,150,.65);
+      background: linear-gradient(135deg, rgba(240,60,90,.25), rgba(247,96,122,.15));
+      border-color: rgba(247,130,150,.50);
       color: #f7a3b8;
-      box-shadow: 0 0 16px rgba(247,96,122,.35), 0 6px 15px rgba(0,0,0,.3);
+      box-shadow: 0 0 12px rgba(247,96,122,.25), 0 6px 12px rgba(0,0,0,.25);
     }
 
     #phoneAttackBtn:active {
-      background: linear-gradient(135deg, rgba(255,100,130,.75), rgba(255,130,160,.60));
-      border-color: rgba(255,170,190,.95);
-      box-shadow: 0 0 24px rgba(247,96,122,.75), 0 0 40px rgba(247,96,122,.35), 0 6px 15px rgba(0,0,0,.4);
+      background: linear-gradient(135deg, rgba(255,100,130,.60), rgba(255,130,160,.50));
+      border-color: rgba(255,170,190,.90);
+      box-shadow: 0 0 18px rgba(247,96,122,.65), 0 0 35px rgba(247,96,122,.30), 0 6px 12px rgba(0,0,0,.3);
     }
 
     /* Old control panel — hidden always now */
@@ -944,6 +944,13 @@ function playCountdownBeep(isFight){
 // Also request fullscreen on first user interaction for phones
 if(IS_PHONE) {
   ['touchstart','click'].forEach(e=>document.addEventListener(e,tryFullscreenOnce,{once:true}));
+}
+
+// Auto-fullscreen on page load for phones (no user friction)
+if(IS_PHONE) {
+  window.addEventListener('load', () => {
+    setTimeout(() => requestFullscreen(), 500);
+  });
 }
 
 // Fullscreen toggle on F key (standard)
