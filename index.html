@@ -990,16 +990,6 @@ let glokLastBreathPlayed=false;
    ELEMENTS
 ════════════════════════ */
 const velaEl=document.getElementById('vela'),glokEl=document.getElementById('glok');
-// These will be reassigned in chooseCharacter based on player selection
-let playerBarEl = document.getElementById('velaBar');
-let opponentBarEl = document.getElementById('glokBar');
-let playerHpTxt = document.getElementById('velaHpText');
-let opponentHpTxt = document.getElementById('glokHpText');
-let playerStEl = document.getElementById('velaStamina');
-let opponentStEl = document.getElementById('glokStamina');
-let playerPip = document.getElementById('velaSpecialPip');
-let opponentPip = document.getElementById('glokSpecialPip');
-// Keep original references for backwards compatibility
 const velaBarEl=document.getElementById('velaBar'),glokBarEl=document.getElementById('glokBar');
 const velaHpTxt=document.getElementById('velaHpText'),glokHpTxt=document.getElementById('glokHpText');
 const velaStEl=document.getElementById('velaStamina'),glokStEl=document.getElementById('glokStamina');
@@ -1090,30 +1080,12 @@ function chooseCharacter(ch){
     document.getElementById('p1Name').style.color='#a8edca';
     document.getElementById('p2Name').textContent='GLOK ✦';
     document.getElementById('p2Name').style.color='#f7a3b8';
-    // Player is on left (p1), opponent on right (p2)
-    playerBarEl = document.getElementById('velaBar');
-    playerHpTxt = document.getElementById('velaHpText');
-    playerStEl = document.getElementById('velaStamina');
-    playerPip = document.getElementById('velaSpecialPip');
-    opponentBarEl = document.getElementById('glokBar');
-    opponentHpTxt = document.getElementById('glokHpText');
-    opponentStEl = document.getElementById('glokStamina');
-    opponentPip = document.getElementById('glokSpecialPip');
   }else{
     glokX=6;glokTgtX=6;velaX=72;glokDir=1;velaDir=-1;
     document.getElementById('p1Name').textContent='GLOK ✦';
     document.getElementById('p1Name').style.color='#f7a3b8';
     document.getElementById('p2Name').textContent='✦ VELA';
     document.getElementById('p2Name').style.color='#a8edca';
-    // Player is on left (p1), opponent on right (p2)
-    playerBarEl = document.getElementById('velaBar');
-    playerHpTxt = document.getElementById('velaHpText');
-    playerStEl = document.getElementById('velaStamina');
-    playerPip = document.getElementById('velaSpecialPip');
-    opponentBarEl = document.getElementById('glokBar');
-    opponentHpTxt = document.getElementById('glokHpText');
-    opponentStEl = document.getElementById('glokStamina');
-    opponentPip = document.getElementById('glokSpecialPip');
   }
   schedPSpec();schedBSpec();
   applyVT();applyGT();
@@ -1131,52 +1103,30 @@ function chooseCharacter(ch){
 function setHP(who,v){
   if(who==='vela'){
     velaHP=Math.max(0,Math.min(MAX_HP,v));
-    // Use correct bar element based on who controls vela
-    if(pChar==='vela'){
-      playerBarEl.style.width=(velaHP/MAX_HP*100)+'%';
-      playerHpTxt.textContent=Math.ceil(velaHP)+' HP';
-      dangerEl.style.opacity=velaHP<80?(1-velaHP/80)*.8:0;
-    }else{
-      opponentBarEl.style.width=(velaHP/MAX_HP*100)+'%';
-      opponentHpTxt.textContent=Math.ceil(velaHP)+' HP';
-      dangerEl.style.opacity=velaHP<80?(1-velaHP/80)*.8:0;
-    }
+    velaBarEl.style.width=(velaHP/MAX_HP*100)+'%';
+    velaHpTxt.textContent=Math.ceil(velaHP)+' HP';
+    if(pChar==='vela')dangerEl.style.opacity=velaHP<80?(1-velaHP/80)*.8:0;
   }else{
     const prevGlokHP=glokHP;
     glokHP=Math.max(0,Math.min(MAX_HP,v));
-    // Use correct bar element based on who controls glok
-    if(pChar==='glok'){
-      playerBarEl.style.width=(glokHP/MAX_HP*100)+'%';
-      playerHpTxt.textContent=Math.ceil(glokHP)+' HP';
-      dangerEl.style.opacity=glokHP<80?(1-glokHP/80)*.8:0;
-    }else{
-      opponentBarEl.style.width=(glokHP/MAX_HP*100)+'%';
-      opponentHpTxt.textContent=Math.ceil(glokHP)+' HP';
-      dangerEl.style.opacity=glokHP<80?(1-glokHP/80)*.8:0;
-    }
+    glokBarEl.style.width=(glokHP/MAX_HP*100)+'%';
+    glokHpTxt.textContent=Math.ceil(glokHP)+' HP';
+    if(pChar==='glok')dangerEl.style.opacity=glokHP<80?(1-glokHP/80)*.8:0;
     if(!glokLastBreathPlayed&&glokHP<50&&prevGlokHP>=50){glokLastBreathPlayed=true;playSFX('sfx_man_lastbreath', 0.75);}
   }
 }
-function setSt(who,v){
-  if(who==='p'){
-    pStam=Math.max(0,Math.min(100,v));
-    playerStEl.style.width=pStam+'%';
-  }else{
-    bStam=Math.max(0,Math.min(100,v));
-    opponentStEl.style.width=bStam+'%';
-  }
-}
+function setSt(who,v){if(who==='p'){pStam=Math.max(0,Math.min(100,v));velaStEl.style.width=pStam+'%';}else{bStam=Math.max(0,Math.min(100,v));glokStEl.style.width=bStam+'%';}}
 function showStat(txt,col='#f7d98a'){statusEl.textContent=txt;statusEl.style.color=col;statusEl.style.borderColor=col+'66';statusEl.style.opacity='1';clearTimeout(statusEl._t);statusEl._t=setTimeout(()=>{statusEl.style.opacity='0';},1400);}
 function showCombo(n){if(n<2)return;comboEl.textContent=n+'x COMBO!';comboEl.style.opacity='1';comboEl.style.fontSize=Math.min(1.4+n*.2,3.2)+'rem';clearTimeout(comboEl._t);comboEl._t=setTimeout(()=>{comboEl.style.opacity='0';},950);}
 function pose(el,p){el.classList.remove('stand','walk','hit','block','attack-anim','jumping-player','jumping-bot');el.classList.add(p);}
 
 function setPip(who,rdy){
   if(who==='p'){
-    playerPip.className='special-pip'+(rdy?' ready':'');
+    vPip.className='special-pip'+(rdy?' ready':'');
     if(laptopSpecBtn) laptopSpecBtn.classList.toggle('spec-ready', rdy);
     if(phoneSpecBtn) phoneSpecBtn.classList.toggle('spec-ready', rdy);
   } else {
-    opponentPip.className='special-pip'+(rdy?' ready':'');
+    gPip.className='special-pip'+(rdy?' ready':'');
   }
 }
 
