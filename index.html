@@ -329,21 +329,14 @@
       box-sizing: border-box;
     }
 
-    /* ── SQUARE D-PAD (LEFT SIDE) ── */
+    /* ── D-PAD BUTTONS (LEFT SIDE) ── */
     #dpad {
       position: absolute;
       bottom: 0px;
       left: 12px;
       pointer-events: all;
-      display: grid;
-      grid-template-columns: repeat(3, 48px);
-      grid-template-rows: repeat(3, 48px);
-      gap: 4px;
-      background: rgba(20,15,40,.30);
-      padding: 6px;
-      border-radius: 8px;
-      border: 2px solid rgba(163,212,247,.20);
-      backdrop-filter: blur(8px);
+      display: flex;
+      gap: 8px;
     }
 
     .dpad-btn {
@@ -369,20 +362,6 @@
       border-color: rgba(163,212,247,.90);
       transform: scale(.88);
       box-shadow: 0 0 14px rgba(163,212,247,.70), inset 0 0 6px rgba(255,255,255,.10);
-    }
-
-    .dpad-center {
-      background: rgba(255,255,255,.02) !important;
-      border-color: rgba(255,255,255,.05) !important;
-      pointer-events: none !important;
-      box-shadow: none !important;
-    }
-
-    .dpad-empty {
-      background: transparent !important;
-      border: none !important;
-      pointer-events: none !important;
-      box-shadow: none !important;
     }
 
     /* ── ROUNDED ACTION BUTTONS (RIGHT SIDE) ── */
@@ -700,17 +679,11 @@
 
 <!-- ── PHONE CONTROLS ── -->
 <div id="phoneControls">
-  <!-- LEFT: D-PAD for MOVEMENT -->
+  <!-- LEFT: D-PAD buttons (no box) -->
   <div id="dpad">
-    <div class="dpad-btn dpad-empty"></div>
-    <div class="dpad-btn" id="dpadUp">▲</div>
-    <div class="dpad-btn dpad-empty"></div>
     <div class="dpad-btn" id="dpadLeft">◀</div>
-    <div class="dpad-btn dpad-center"></div>
+    <div class="dpad-btn" id="dpadUp">▲</div>
     <div class="dpad-btn" id="dpadRight">▶</div>
-    <div class="dpad-btn dpad-empty"></div>
-    <div class="dpad-btn dpad-empty"></div>
-    <div class="dpad-btn dpad-empty"></div>
   </div>
 
   <!-- RIGHT: Action buttons (D, A, S) -->
