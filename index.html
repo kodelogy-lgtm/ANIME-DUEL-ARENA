@@ -320,28 +320,28 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 180px;
+      height: 240px;
       z-index: 50;
       display: none;
       pointer-events: none;
-      background: linear-gradient(to top, rgba(4,3,16,.90) 0%, rgba(4,3,16,.60) 50%, transparent 100%);
-      padding: 0 16px 16px 16px;
+      background: linear-gradient(to top, rgba(4,3,16,.90) 0%, rgba(4,3,16,.50) 60%, transparent 100%);
+      padding: 0 12px 12px 12px;
       box-sizing: border-box;
     }
 
     /* ── SQUARE D-PAD (LEFT SIDE) ── */
     #dpad {
       position: absolute;
-      bottom: 16px;
-      left: 16px;
+      bottom: 12px;
+      left: 12px;
       pointer-events: all;
       display: grid;
-      grid-template-columns: repeat(3, 70px);
-      grid-template-rows: repeat(3, 70px);
-      gap: 8px;
+      grid-template-columns: repeat(3, 50px);
+      grid-template-rows: repeat(3, 50px);
+      gap: 6px;
       background: rgba(20,15,40,.45);
-      padding: 12px;
-      border-radius: 12px;
+      padding: 8px;
+      border-radius: 10px;
       border: 2px solid rgba(163,212,247,.25);
       backdrop-filter: blur(12px);
     }
@@ -349,9 +349,9 @@
     .dpad-btn {
       background: rgba(60,100,180,.25);
       border: 2px solid rgba(163,212,247,.40);
-      border-radius: 8px;
+      border-radius: 6px;
       color: #a3d4f7;
-      font-size: 1.4rem;
+      font-size: 1.1rem;
       font-weight: 900;
       display: flex;
       align-items: center;
@@ -367,8 +367,8 @@
     .dpad-btn.pressed {
       background: rgba(100,160,255,.55);
       border-color: rgba(163,212,247,.95);
-      transform: scale(.88);
-      box-shadow: 0 0 16px rgba(163,212,247,.65), inset 0 0 8px rgba(255,255,255,.15);
+      transform: scale(.85);
+      box-shadow: 0 0 12px rgba(163,212,247,.65), inset 0 0 6px rgba(255,255,255,.15);
     }
 
     .dpad-center {
@@ -386,28 +386,32 @@
     }
 
     /* ── ROUNDED ACTION BUTTONS (RIGHT SIDE) ── */
+    /* Layout: S on top, D on bottom-left, A on bottom-right */
     #actionPad {
       position: absolute;
-      bottom: 16px;
-      right: 16px;
+      bottom: 12px;
+      right: 12px;
       pointer-events: all;
+      width: 190px;
+      height: 220px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
       align-items: center;
+      justify-content: flex-end;
+      gap: 0;
     }
 
     .action-btn {
-      position: relative;
-      width: 80px;
-      height: 80px;
+      position: absolute;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       border: 2.5px solid transparent;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 0;
       cursor: pointer;
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
@@ -421,66 +425,71 @@
 
     .action-btn .ab-icon { font-size: 2rem; line-height: 1; }
     .action-btn .ab-label { font-size: 0; }
-    .action-btn:active { transform: scale(.85) !important; }
+    .action-btn:active { transform: scale(.80) !important; }
 
-    /* DEFEND (D) — Blue, Rounded */
-    #phoneDefendBtn {
-      background: linear-gradient(135deg, rgba(80,120,255,.35), rgba(100,140,255,.25));
-      border-color: rgba(140,180,255,.65);
-      color: #a3d4f7;
-      box-shadow: 0 0 20px rgba(100,140,255,.45), 0 8px 20px rgba(0,0,0,.3);
-    }
-
-    #phoneDefendBtn:active,
-    #phoneDefendBtn.active {
-      background: linear-gradient(135deg, rgba(100,160,255,.75), rgba(120,180,255,.60));
-      border-color: rgba(180,210,255,.95);
-      box-shadow: 0 0 28px rgba(100,160,255,.85), 0 0 50px rgba(100,160,255,.4), 0 8px 20px rgba(0,0,0,.4);
-    }
-
-    /* ATTACK (A) — Red/Pink, Rounded */
-    #phoneAttackBtn {
-      background: linear-gradient(135deg, rgba(240,60,90,.35), rgba(247,96,122,.25));
-      border-color: rgba(247,130,150,.65);
-      color: #f7a3b8;
-      box-shadow: 0 0 20px rgba(247,96,122,.45), 0 8px 20px rgba(0,0,0,.3);
-    }
-
-    #phoneAttackBtn:active {
-      background: linear-gradient(135deg, rgba(255,100,130,.75), rgba(255,130,160,.60));
-      border-color: rgba(255,170,190,.95);
-      box-shadow: 0 0 28px rgba(247,96,122,.85), 0 0 50px rgba(247,96,122,.4), 0 8px 20px rgba(0,0,0,.4);
-    }
-
-    /* SPECIAL (S) — Gold, Rounded, Top Position */
+    /* SPECIAL (S) — Gold, Top Position */
     #phoneSpecialBtn {
-      width: 80px;
-      height: 80px;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
       background: linear-gradient(135deg, rgba(247,217,138,.25), rgba(255,200,100,.15));
       border-color: rgba(247,217,138,.40);
       color: rgba(247,217,138,.60);
-      box-shadow: 0 0 16px rgba(247,217,138,.25), 0 8px 20px rgba(0,0,0,.3);
+      box-shadow: 0 0 16px rgba(247,217,138,.25), 0 6px 15px rgba(0,0,0,.3);
     }
 
     #phoneSpecialBtn.spec-ready {
       background: linear-gradient(135deg, rgba(247,217,138,.50), rgba(255,220,150,.40));
       border-color: #f7d98a;
       color: #f7d98a;
-      box-shadow: 0 0 28px rgba(247,217,138,.85), 0 0 50px rgba(247,217,138,.45), 0 8px 20px rgba(0,0,0,.3);
+      box-shadow: 0 0 28px rgba(247,217,138,.85), 0 0 50px rgba(247,217,138,.45), 0 6px 15px rgba(0,0,0,.3);
       animation: phoneSpecPulse .85s ease-in-out infinite alternate;
     }
 
     @keyframes phoneSpecPulse {
       from { 
-        box-shadow: 0 0 20px rgba(247,217,138,.6), 0 0 40px rgba(247,217,138,.25), 0 8px 20px rgba(0,0,0,.3); 
+        box-shadow: 0 0 20px rgba(247,217,138,.6), 0 0 40px rgba(247,217,138,.25), 0 6px 15px rgba(0,0,0,.3); 
       }
       to { 
-        box-shadow: 0 0 32px rgba(247,217,138,1.0), 0 0 60px rgba(247,217,138,.55), 0 8px 20px rgba(0,0,0,.3);
+        box-shadow: 0 0 32px rgba(247,217,138,1.0), 0 0 60px rgba(247,217,138,.55), 0 6px 15px rgba(0,0,0,.3);
       }
     }
 
     #phoneSpecialBtn:active {
-      transform: scale(.85) !important;
+      transform: translateX(-50%) scale(.80) !important;
+    }
+
+    /* DEFEND (D) — Blue, Bottom-Left */
+    #phoneDefendBtn {
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(135deg, rgba(80,120,255,.35), rgba(100,140,255,.25));
+      border-color: rgba(140,180,255,.65);
+      color: #a3d4f7;
+      box-shadow: 0 0 16px rgba(100,140,255,.35), 0 6px 15px rgba(0,0,0,.3);
+    }
+
+    #phoneDefendBtn:active,
+    #phoneDefendBtn.active {
+      background: linear-gradient(135deg, rgba(100,160,255,.75), rgba(120,180,255,.60));
+      border-color: rgba(180,210,255,.95);
+      box-shadow: 0 0 24px rgba(100,160,255,.75), 0 0 40px rgba(100,160,255,.35), 0 6px 15px rgba(0,0,0,.4);
+    }
+
+    /* ATTACK (A) — Red/Pink, Bottom-Right */
+    #phoneAttackBtn {
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(240,60,90,.35), rgba(247,96,122,.25));
+      border-color: rgba(247,130,150,.65);
+      color: #f7a3b8;
+      box-shadow: 0 0 16px rgba(247,96,122,.35), 0 6px 15px rgba(0,0,0,.3);
+    }
+
+    #phoneAttackBtn:active {
+      background: linear-gradient(135deg, rgba(255,100,130,.75), rgba(255,130,160,.60));
+      border-color: rgba(255,170,190,.95);
+      box-shadow: 0 0 24px rgba(247,96,122,.75), 0 0 40px rgba(247,96,122,.35), 0 6px 15px rgba(0,0,0,.4);
     }
 
     /* Old control panel — hidden always now */
