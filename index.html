@@ -961,6 +961,8 @@ const STAM_REGEN=3.0,STAM_TICK=290,SHIELD_MS=10000,SPEC_CD=10000,MAX_HP=300;
    STATE
 ════════════════════════ */
 let pChar='vela',gameOn=false;
+// Player character will be 'vela' or 'glok', bot will be the other
+let playerChar='vela',botChar='glok';  // These get set by chooseCharacter()
 let velaHP=MAX_HP,glokHP=MAX_HP;
 let velaX=5,glokX=72,glokTgtX=72;
 let velaDir=1,glokDir=-1;
@@ -1064,6 +1066,10 @@ function playHealthBarIntro(){
 function chooseCharacter(ch){
   playSFX('sfx_char_select', 0.85);
   pChar=ch;
+  // SET PLAYER AND BOT CHARACTERS - NO CONFUSION
+  playerChar = ch;
+  botChar = (ch === 'vela') ? 'glok' : 'vela';
+  
   document.getElementById('selectScreen').style.display='none';
   document.getElementById('gameHud').style.display='flex';
   velaEl.style.display='';glokEl.style.display='';
@@ -1153,6 +1159,10 @@ const bH=()=>pChar==='vela'?glokHP:velaHP;
 const setPH=(v)=>setHP(pChar==='vela'?'vela':'glok',v);
 const setBH=(v)=>setHP(pChar==='vela'?'glok':'vela',v);
 const bIsVela=()=>pChar==='glok';
+// Get player and bot HP by character names
+const getCharHP=(char)=>char==='vela'?velaHP:glokHP;
+const getPlayerName=()=>playerChar==='vela'?'Vela':'Glok';
+const getBotName=()=>botChar==='vela'?'Vela':'Glok';
 
 /* ════════════════════════
    COLLISION
@@ -1177,11 +1187,14 @@ function knockback(isVela,dir){
 function endGame(winner){
   if(over)return;over=true;
   clearTimeout(randomChatterTimer);
-  const pn=pChar==='vela'?'Vela':'Glok',bn=pChar==='vela'?'Glok':'Vela';
+  const pn=playerChar==='vela'?'Vela':'Glok',bn=botChar==='vela'?'Vela':'Glok';
   goTitleEl.textContent=winner+' Wins!';
   goSubEl.textContent=winner===pn?'🌸 Victory — you mastered the duel!':winner===bn?'💔 Defeated — press Play Again!':'⚡ Draw!';
-  if(winner==='Vela'||winner===pn&&pChar==='vela'){playSFX('sfx_man_pain', 0.85);}
-  else if(winner==='Glok'||winner===pn&&pChar==='glok'){playSFX('sfx_women_pain', 0.85);}
+  if(winner===pn){playSFX('sfx_man_pain', 0.85);}
+  else if(winner===bn){playSFX('sfx_women_pain', 0.85);}
+  else{if(glokHP<=0)playSFX('sfx_man_pain', 0.85);else if(velaHP<=0)playSFX('sfx_women_pain', 0.85);}
+  gameOverEl.style.display='flex';
+}
   else{if(glokHP<=0)playSFX('sfx_man_pain', 0.85);else if(velaHP<=0)playSFX('sfx_women_pain', 0.85);}
   gameOverEl.style.display='flex';
 }
@@ -1203,8 +1216,26 @@ function hideShldBnr(){
   shldBTmr=setTimeout(()=>{shldBnr.className='';},250);
 }
 function shieldBreak(who){
-  if(who==='vela'){const p=lastBotDmg+10;setHP('vela',velaHP-p);bigFX((velaX+glokX)/2,50);spawnDmgTxt(velaX/100*window.innerWidth,window.innerHeight*.36,p,'#ff2244');showStat('SHIELD BROKE! -'+p+' HP 💥','#ff2244');pose(velaEl,'hit');setTimeout(()=>{if(!over&&!pDef)pose(velaEl,'stand');},350);if(velaHP<=0&&!over)endGame('Glok');}
-  else{const p=DMG_MAX+10;setHP('glok',glokHP-p);bigFX((velaX+glokX)/2,50);spawnDmgTxt(glokX/100*window.innerWidth,window.innerHeight*.36,p,'#ff2244');showStat("GLOK'S SHIELD BROKE! -"+p+' HP 💥','#ff2244');pose(glokEl,'hit');setTimeout(()=>{if(!over&&!bDef)pose(glokEl,'stand');},350);if(glokHP<=0&&!over)endGame('Vela');}
+  // who is 'vela' or 'glok' - the character whose shield is breaking
+  if(who==='vela'){
+    const p=lastBotDmg+10;
+    setHP('vela',velaHP-p);
+    bigFX((velaX+glokX)/2,50);
+    spawnDmgTxt(velaX/100*window.innerWidth,window.innerHeight*.36,p,'#ff2244');
+    showStat('SHIELD BROKE! -'+p+' HP 💥','#ff2244');
+    pose(velaEl,'hit');
+    setTimeout(()=>{if(!over&&!pDef)pose(velaEl,'stand');},350);
+    if(velaHP<=0&&!over)endGame('Glok');  // Glok wins when Vela dies
+  }else{
+    const p=DMG_MAX+10;
+    setHP('glok',glokHP-p);
+    bigFX((velaX+glokX)/2,50);
+    spawnDmgTxt(glokX/100*window.innerWidth,window.innerHeight*.36,p,'#ff2244');
+    showStat("GLOK'S SHIELD BROKE! -"+p+' HP 💥','#ff2244');
+    pose(glokEl,'hit');
+    setTimeout(()=>{if(!over&&!bDef)pose(glokEl,'stand');},350);
+    if(glokHP<=0&&!over)endGame('Vela');  // Vela wins when Glok dies
+  }
   doShake();playHit(true);
 }
 
@@ -1339,7 +1370,7 @@ function doGlokSpecial(isPlayer){
       const dmg=60;setHP('vela',velaHP-dmg);bigFX((velaX+glokX)/2,50);
       spawnDmgTxt(velaX/100*window.innerWidth,window.innerHeight*.38,dmg,'#f7a3b8');
       pFrozen=false;clearTimeout(pfTmr);iceEl.style.display='none';
-      if(velaHP<=0&&!over)endGame(pChar==='vela'?'Glok':'Vela');
+      if(velaHP<=0&&!over)endGame('Glok');  // When Vela dies, Glok (the opponent) always wins
       playHit(true);
     },300);
     setTimeout(()=>{holeEl.style.display='none';},1300);
@@ -1526,13 +1557,13 @@ setInterval(()=>{if(!gameOn||over)return;if(pDef)setSt('p',pStam-1.2);},300);
 setInterval(()=>{
   if(!gameOn||over)return;
   setHP('vela',velaHP-.28);setHP('glok',glokHP-.28);
-  if(velaHP<=0&&!over)endGame(pChar==='vela'?'Glok':'Vela');
-  if(glokHP<=0&&!over)endGame(pChar==='vela'?'Vela':'Glok');
+  if(velaHP<=0&&!over)endGame('Glok');  // When Vela dies from health drain, Glok wins
+  if(glokHP<=0&&!over)endGame('Vela');  // When Glok dies from health drain, Vela wins
 },900);
 setInterval(()=>{
   if(!gameOn||over||timeLeft<=0)return;timeLeft--;timerEl.textContent=timeLeft;
   if(timeLeft<=12)timerEl.classList.add('urgent');
-  if(timeLeft===0){if(velaHP>glokHP)endGame(pChar==='vela'?'Vela':'Glok');else if(glokHP>velaHP)endGame(pChar==='vela'?'Glok':'Vela');else endGame('Draw');}
+  if(timeLeft===0){if(velaHP>glokHP)endGame('Vela');else if(glokHP>velaHP)endGame('Glok');else endGame('Draw');}
 },1000);
 
 /* ════════════════════════
