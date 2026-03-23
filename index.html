@@ -346,14 +346,18 @@
       align-items: center;
     }
 
+    .dpad-top-row {
+      justify-content: center;
+    }
+
+    .dpad-bottom-row {
+      justify-content: space-between;
+      width: 112px; /* 48px button + 8px gap + 48px spacer + 8px gap + 48px button */
+    }
+
     .dpad-spacer {
       width: 48px;
       height: 48px;
-    }
-
-    .dpad-down-space {
-      opacity: 0.3;
-      pointer-events: none;
     }
 
     .dpad-btn {
@@ -698,17 +702,15 @@
 
 <!-- ── PHONE CONTROLS ── -->
 <div id="phoneControls">
-  <!-- LEFT: D-PAD buttons (jump above left/right, space for down) -->
+  <!-- LEFT: D-PAD buttons (up above, left/right below) -->
   <div id="dpad">
-    <div class="dpad-row">
-      <div class="dpad-btn" id="dpadLeft">◀</div>
+    <div class="dpad-row dpad-top-row">
       <div class="dpad-btn" id="dpadUp">▲</div>
-      <div class="dpad-btn" id="dpadRight">▶</div>
     </div>
-    <div class="dpad-row">
+    <div class="dpad-row dpad-bottom-row">
+      <div class="dpad-btn" id="dpadLeft">◀</div>
       <div class="dpad-spacer"></div>
-      <div class="dpad-btn dpad-down-space" id="dpadDown">▼</div>
-      <div class="dpad-spacer"></div>
+      <div class="dpad-btn" id="dpadRight">▶</div>
     </div>
   </div>
 
