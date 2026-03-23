@@ -991,10 +991,15 @@ let glokLastBreathPlayed=false;
 ════════════════════════ */
 const velaEl=document.getElementById('vela'),glokEl=document.getElementById('glok');
 // These will be reassigned in chooseCharacter based on player selection
-let playerBarEl, opponentBarEl;
-let playerHpTxt, opponentHpTxt;
-let playerStEl, opponentStEl;
-let playerPip, opponentPip;
+let playerBarEl = document.getElementById('velaBar');
+let opponentBarEl = document.getElementById('glokBar');
+let playerHpTxt = document.getElementById('velaHpText');
+let opponentHpTxt = document.getElementById('glokHpText');
+let playerStEl = document.getElementById('velaStamina');
+let opponentStEl = document.getElementById('glokStamina');
+let playerPip = document.getElementById('velaSpecialPip');
+let opponentPip = document.getElementById('glokSpecialPip');
+// Keep original references for backwards compatibility
 const velaBarEl=document.getElementById('velaBar'),glokBarEl=document.getElementById('glokBar');
 const velaHpTxt=document.getElementById('velaHpText'),glokHpTxt=document.getElementById('glokHpText');
 const velaStEl=document.getElementById('velaStamina'),glokStEl=document.getElementById('glokStamina');
