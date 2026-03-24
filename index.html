@@ -9,90 +9,24 @@
     :root{--mint:#a8edca;--sky:#a3d4f7;--rose:#f7a3b8;--gold:#f7d98a;--glass:rgba(255,255,255,0.13);--glass2:rgba(255,255,255,0.22);--border:rgba(255,255,255,0.28);}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html,body{width:100%;height:100vh;overflow:hidden;font-family:'Nunito',sans-serif;color:#fff;}
-    /* Fullscreen mode - remove any spacing */
-    html:-webkit-full-screen,html:-moz-full-screen,html:fullscreen {
-      width: 100%;
-      height: 100%;
-    }
-    body:-webkit-full-screen,body:-moz-full-screen,body:fullscreen {
-      width: 100%;
-      height: 100%;
-    }
+    html:-webkit-full-screen,html:-moz-full-screen,html:fullscreen{width:100%;height:100%;}
+    body:-webkit-full-screen,body:-moz-full-screen,body:fullscreen{width:100%;height:100%;}
     #arenaBg{position:fixed;inset:0;z-index:0;background:url('main_bg.png') center/cover no-repeat;}
     #arenaBg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,transparent 25%,transparent 75%,rgba(0,0,0,.38) 100%);}
     @keyframes screenShake{0%{transform:translate(0,0)}15%{transform:translate(-6px,-4px)}30%{transform:translate(7px,3px)}50%{transform:translate(-4px,5px)}70%{transform:translate(4px,-3px)}85%{transform:translate(-2px,2px)}100%{transform:translate(0,0)}}
     body.shaking{animation:screenShake .28s ease-out;}
-
-    /* ══════════════════════════════════════
-       ROTATE OVERLAY — shown on phones in portrait
-       ══════════════════════════════════════ */
-    #rotateOverlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: linear-gradient(135deg, rgba(4,3,16,.98), rgba(10,6,28,.98));
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.6rem;
-      text-align: center;
-      padding: 2rem;
-    }
-    #rotateOverlay .rotate-icon {
-      font-size: 5rem;
-      animation: rotateAnim 1.8s cubic-bezier(.22,1,.36,1) infinite;
-      filter: drop-shadow(0 0 24px rgba(163,212,247,.9));
-    }
-    @keyframes rotateAnim {
-      0%   { transform: rotate(0deg) scale(1);   }
-      35%  { transform: rotate(90deg) scale(1.12); }
-      60%  { transform: rotate(90deg) scale(1.06); }
-      80%  { transform: rotate(90deg) scale(1);   }
-      100% { transform: rotate(0deg) scale(1);   }
-    }
-    #rotateOverlay .rotate-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      background: linear-gradient(90deg, #a8edca, #a3d4f7, #f7a3b8);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    #rotateOverlay .rotate-sub {
-      font-size: .85rem;
-      opacity: .55;
-      letter-spacing: .08em;
-      line-height: 1.6;
-      max-width: 260px;
-    }
-    #rotateOverlay .rotate-arrows {
-      display: flex;
-      gap: 1rem;
-      margin-top: .4rem;
-    }
-    #rotateOverlay .rotate-arrow {
-      font-size: 1.6rem;
-      opacity: .45;
-      animation: arrowBounce 1.2s ease-in-out infinite alternate;
-    }
-    #rotateOverlay .rotate-arrow:nth-child(1) { animation-delay: 0s; }
-    #rotateOverlay .rotate-arrow:nth-child(2) { animation-delay: .4s; }
-    #rotateOverlay .rotate-arrow:nth-child(3) { animation-delay: .8s; }
-    @keyframes arrowBounce {
-      from { opacity: .25; transform: translateX(-4px); }
-      to   { opacity: .8;  transform: translateX(4px);  }
-    }
-    /* Portrait detection: show overlay only on phones in portrait */
-    @media (max-width: 767px) and (orientation: portrait) {
-      #rotateOverlay { display: flex; }
-    }
-    /* Also hide via JS for finer control */
-
-    /* ── SELECT SCREEN ── */
+    #rotateOverlay{display:none;position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,rgba(4,3,16,.98),rgba(10,6,28,.98));flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;text-align:center;padding:2rem;}
+    #rotateOverlay .rotate-icon{font-size:5rem;animation:rotateAnim 1.8s cubic-bezier(.22,1,.36,1) infinite;filter:drop-shadow(0 0 24px rgba(163,212,247,.9));}
+    @keyframes rotateAnim{0%{transform:rotate(0deg) scale(1)}35%{transform:rotate(90deg) scale(1.12)}60%{transform:rotate(90deg) scale(1.06)}80%{transform:rotate(90deg) scale(1)}100%{transform:rotate(0deg) scale(1)}}
+    #rotateOverlay .rotate-title{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(90deg,#a8edca,#a3d4f7,#f7a3b8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    #rotateOverlay .rotate-sub{font-size:.85rem;opacity:.55;letter-spacing:.08em;line-height:1.6;max-width:260px;}
+    #rotateOverlay .rotate-arrows{display:flex;gap:1rem;margin-top:.4rem;}
+    #rotateOverlay .rotate-arrow{font-size:1.6rem;opacity:.45;animation:arrowBounce 1.2s ease-in-out infinite alternate;}
+    #rotateOverlay .rotate-arrow:nth-child(1){animation-delay:0s;}
+    #rotateOverlay .rotate-arrow:nth-child(2){animation-delay:.4s;}
+    #rotateOverlay .rotate-arrow:nth-child(3){animation-delay:.8s;}
+    @keyframes arrowBounce{from{opacity:.25;transform:translateX(-4px)}to{opacity:.8;transform:translateX(4px)}}
+    @media (max-width:767px) and (orientation:portrait){#rotateOverlay{display:flex;}}
     #selectScreen{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;background:linear-gradient(135deg,rgba(4,3,16,.97),rgba(10,6,28,.97));padding:1rem;}
     .select-title{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(90deg,#a8edca,#a3d4f7,#f7a3b8,#f7d98a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:titlePulse 3s ease-in-out infinite;}
     .select-sub{font-size:.75rem;opacity:.6;letter-spacing:.15em;text-transform:uppercase;margin-top:-.5rem;}
@@ -104,12 +38,8 @@
     .special-tag{font-size:.55rem;font-weight:700;letter-spacing:.06em;padding:.18rem .5rem;border-radius:99px;margin-top:.1rem;text-transform:uppercase;}
     .char-stat-box{font-size:.55rem;opacity:.5;text-align:center;line-height:1.4;margin-top:.1rem;}
     .select-hint{font-size:.65rem;opacity:.4;letter-spacing:.08em;text-align:center;max-width:480px;margin-top:.5rem;}
-
-    /* ── HEALTH BAR INTRO ANIMATION ── */
     @keyframes barReveal{from{width:0%}to{width:var(--target-width,100%)}}
     .bar-fill.intro-anim{animation:barReveal 1.2s cubic-bezier(.22,1,.36,1) forwards;}
-
-    /* ── HUD ── */
     .hud{position:fixed;top:0;left:0;right:0;padding:.6rem 1.2rem;z-index:50;display:flex;align-items:center;justify-content:space-between;background:rgba(6,5,16,.62);border-bottom:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);}
     .fighter-hud{display:flex;flex-direction:column;gap:.26rem;min-width:220px;}
     .fighter-hud.right{align-items:flex-end;}
@@ -131,8 +61,6 @@
     #roundTimer{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:900;letter-spacing:.08em;padding:.2rem .9rem;background:rgba(255,255,255,.12);border:1px solid var(--border);border-radius:10px;min-width:80px;text-align:center;transition:color .3s;}
     #roundTimer.urgent{color:#f7607a;animation:pulse-timer .5s infinite alternate;}
     @keyframes pulse-timer{from{opacity:1}to{opacity:.5}}
-
-    /* ── COUNTDOWN ── */
     #countdownOverlay{position:fixed;inset:0;z-index:249;background:rgba(4,3,16,.5);backdrop-filter:blur(3px);display:none;pointer-events:none;}
     #countdownOverlay.active{display:block;}
     #countdown{position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center;pointer-events:none;}
@@ -146,8 +74,6 @@
     @keyframes fightPop{0%{opacity:0;transform:scale(.3) rotate(-8deg);filter:blur(10px)}18%{opacity:1;transform:scale(1.22) rotate(3deg);filter:blur(0)}32%{opacity:1;transform:scale(.94) rotate(-1deg)}50%{opacity:1;transform:scale(1.05) rotate(0)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15) translateY(-15px);filter:blur(4px)}}
     .countdown-num.anim{animation:countPop .92s cubic-bezier(.22,1,.36,1) forwards;}
     .countdown-num.anim-fight{animation:fightPop 1.25s cubic-bezier(.22,1,.36,1) forwards;}
-
-    /* ── OVERLAYS ── */
     #comboDisplay{position:fixed;top:86px;left:50%;transform:translateX(-50%);z-index:60;font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;color:#f7d98a;text-shadow:0 0 16px rgba(247,217,138,.85);opacity:0;transition:opacity .3s;pointer-events:none;letter-spacing:.06em;}
     #statusBadge{position:fixed;top:86px;right:1.4rem;z-index:60;padding:.3rem .75rem;background:rgba(0,0,0,.45);border:1px solid var(--border);border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.08em;opacity:0;transition:opacity .3s;pointer-events:none;}
     #shieldBanner{position:fixed;top:68px;left:50%;transform:translateX(-50%);z-index:80;pointer-events:none;display:flex;align-items:center;gap:.5rem;padding:.38rem 1.3rem .38rem .9rem;border-radius:999px;font-family:'Orbitron',sans-serif;font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity .22s ease;}
@@ -165,8 +91,6 @@
     @keyframes specialAnim{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}30%{opacity:1;transform:translate(-50%,-50%) scale(1)}75%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.06)}}
     #specialBanner.vela-special{color:#a8edca;text-shadow:0 0 30px rgba(60,200,140,.9),0 0 60px rgba(60,200,140,.5);}
     #specialBanner.glok-special{color:#f7a3b8;text-shadow:0 0 30px rgba(247,96,122,.9),0 0 60px rgba(247,96,122,.5);}
-
-    /* ── FIGHTERS ── */
     .fighter{position:fixed;bottom:8vh;z-index:20;width:min(15vw,155px);user-select:none;pointer-events:none;image-rendering:pixelated;mix-blend-mode:screen;}
     #vela{filter:drop-shadow(0 0 28px rgba(60,210,140,.85)) drop-shadow(0 0 12px rgba(60,210,140,.6)) contrast(1.28) saturate(1.35) brightness(1.12);}
     #glok{filter:drop-shadow(0 0 28px rgba(247,96,122,.85)) drop-shadow(0 0 12px rgba(247,96,122,.6)) contrast(1.28) saturate(1.35) brightness(1.12);}
@@ -184,8 +108,6 @@
     @keyframes jumpArcBot{0%{bottom:8vh}15%{bottom:22vh}40%{bottom:52vh}50%{bottom:58vh}60%{bottom:52vh}85%{bottom:22vh}100%{bottom:8vh}}
     .fighter.jumping-player{animation:jumpArcPlayer .72s cubic-bezier(.22,.68,0,1.2)!important;}
     .fighter.jumping-bot{animation:jumpArcBot .72s cubic-bezier(.22,.68,0,1.2)!important;}
-
-    /* ── TELEPORT HOLE ── */
     #teleportHole{position:fixed;bottom:6vh;z-index:19;width:min(14vw,140px);pointer-events:none;display:none;image-rendering:pixelated;}
     @keyframes holeAppear{0%{transform:scaleX(0) scaleY(0);opacity:0;filter:brightness(2)}30%{transform:scaleX(1.15) scaleY(1.1);opacity:1;filter:brightness(1.5)}55%{transform:scaleX(1) scaleY(1);opacity:1;filter:brightness(1)}85%{transform:scaleX(1) scaleY(1);opacity:.9}100%{transform:scaleX(1.05) scaleY(.95);opacity:0}}
     #teleportHole.opening{animation:holeAppear 1.3s ease-out forwards;}
@@ -194,19 +116,13 @@
     #departureHole.closing{animation:deptHoleAnim 1.0s ease-in forwards;}
     .void-residue{position:fixed;bottom:6vh;z-index:17;width:min(14vw,140px);height:min(8vw,80px);border-radius:50%;pointer-events:none;background:radial-gradient(ellipse at center,rgba(160,0,255,.55) 0%,rgba(100,0,200,.25) 55%,transparent 100%);box-shadow:0 0 30px rgba(160,0,255,.6),0 0 60px rgba(140,0,200,.3);animation:voidFade 1.8s ease-out forwards;}
     @keyframes voidFade{0%{opacity:1;transform:scaleX(1)}60%{opacity:.6;transform:scaleX(1.1)}100%{opacity:0;transform:scaleX(.5)}}
-
-    /* ── ICE FREEZE BOX ── */
     #iceBox{position:fixed;z-index:22;pointer-events:none;display:none;border:3px solid rgba(120,230,255,.95);background:linear-gradient(135deg,rgba(100,200,255,.18),rgba(180,240,255,.06));border-radius:10px;box-shadow:0 0 24px rgba(100,220,255,.7),0 0 60px rgba(100,220,255,.3),inset 0 0 24px rgba(100,220,255,.15);animation:icePulse .75s ease-in-out infinite;}
     @keyframes icePulse{0%,100%{box-shadow:0 0 24px rgba(100,220,255,.7),0 0 60px rgba(100,220,255,.3),inset 0 0 24px rgba(100,220,255,.15)}50%{box-shadow:0 0 40px rgba(100,220,255,1),0 0 90px rgba(100,220,255,.5),inset 0 0 40px rgba(100,220,255,.28)}}
     #iceBox::before{content:'❄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2.2rem;opacity:.55;animation:iceSpin 2s linear infinite;}
     #iceBox::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 50%,rgba(255,255,255,.06) 100%);border-radius:8px;}
     @keyframes iceSpin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-
-    /* ── LEAF PARTICLES ── */
     .leaf{position:fixed;z-index:25;pointer-events:none;animation:leafFall linear forwards;}
     @keyframes leafFall{0%{opacity:1;transform:translateY(-20px) rotate(0deg) translateX(0)}100%{opacity:0;transform:translateY(100vh) rotate(720deg) translateX(var(--sway,30px))}}
-
-    /* ── CANVAS / FX ── */
     canvas#shardCanvas{position:fixed;inset:0;z-index:10;pointer-events:none;}
     #attackFlash{position:fixed;inset:0;pointer-events:none;z-index:8;opacity:0;transition:opacity .06s;}
     #attackFlash.active{opacity:1;transition:none;}
@@ -219,322 +135,51 @@
     @keyframes dmgFloat{0%{opacity:1;transform:translateY(0) scale(1.2)}45%{opacity:1;transform:translateY(-28px) scale(1)}100%{opacity:0;transform:translateY(-55px) scale(.8)}}
     .clash-burst{position:fixed;pointer-events:none;z-index:15;transform:translate(-50%,-50%);animation:burstPop .38s ease-out forwards;}
     @keyframes burstPop{0%{opacity:1;transform:translate(-50%,-50%) scale(.4)}40%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.3)}}
-
-    /* ── DEFENSE CIRCLES ── */
     .defense-circle{position:fixed;bottom:4vh;width:min(26vw,210px);height:min(26vw,210px);border-radius:50%;pointer-events:none;z-index:18;opacity:0;transition:opacity .20s ease;}
     #velaDefenseCircle{border:4px solid rgba(60,180,255,1);background:radial-gradient(ellipse at center,rgba(60,160,255,.22) 0%,rgba(60,160,255,.08) 55%,transparent 100%);box-shadow:0 0 0 3px rgba(60,180,255,.35),0 0 25px 6px rgba(60,180,255,.65),0 0 60px 12px rgba(60,180,255,.3),0 0 100px 22px rgba(60,180,255,.12),inset 0 0 30px 4px rgba(60,180,255,.2);animation:velaShieldPulse .9s ease-in-out infinite;}
     @keyframes velaShieldPulse{0%,100%{box-shadow:0 0 0 3px rgba(60,180,255,.35),0 0 25px 6px rgba(60,180,255,.65),0 0 60px 12px rgba(60,180,255,.3),inset 0 0 30px 4px rgba(60,180,255,.2);border-color:rgba(60,180,255,1)}50%{box-shadow:0 0 0 6px rgba(60,180,255,.15),0 0 40px 14px rgba(60,180,255,.85),0 0 80px 24px rgba(60,180,255,.45),inset 0 0 50px 10px rgba(60,180,255,.35);border-color:rgba(160,230,255,1)}}
     #glokDefenseCircle{border:4px solid rgba(210,60,255,1);background:radial-gradient(ellipse at center,rgba(200,60,255,.22) 0%,rgba(200,60,255,.08) 55%,transparent 100%);box-shadow:0 0 0 3px rgba(210,60,255,.35),0 0 25px 6px rgba(210,60,255,.65),0 0 60px 12px rgba(210,60,255,.3),0 0 100px 22px rgba(210,60,255,.12),inset 0 0 30px 4px rgba(210,60,255,.2);animation:glokShieldPulse .9s ease-in-out infinite;}
     @keyframes glokShieldPulse{0%,100%{box-shadow:0 0 0 3px rgba(210,60,255,.35),0 0 25px 6px rgba(210,60,255,.65),0 0 60px 12px rgba(210,60,255,.3),inset 0 0 30px 4px rgba(210,60,255,.2);border-color:rgba(210,60,255,1)}50%{box-shadow:0 0 0 6px rgba(210,60,255,.15),0 0 40px 14px rgba(210,60,255,.85),0 0 80px 24px rgba(210,60,255,.45),inset 0 0 50px 10px rgba(210,60,255,.35);border-color:rgba(240,180,255,1)}}
-
-    /* ════════════════════════════════════════
-       RESPONSIVE CONTROLS
-       ════════════════════════════════════════ */
-
-    /* ── LAPTOP: only special button visible, others keyboard only ── */
-    #laptopSpecialWrap {
-      position: fixed;
-      bottom: 1.4rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 50;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: .4rem;
+    #laptopSpecialWrap{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);z-index:50;display:none;flex-direction:column;align-items:center;gap:.4rem;}
+    #laptopSpecialBtn{width:64px;height:64px;border-radius:50%;border:2px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.4);font-family:'Orbitron',sans-serif;font-size:.65rem;font-weight:900;letter-spacing:.06em;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:all .3s cubic-bezier(.22,1,.36,1);-webkit-tap-highlight-color:transparent;}
+    #laptopSpecialBtn .spec-icon{font-size:1.3rem;line-height:1;}
+    #laptopSpecialBtn .spec-key{font-size:.52rem;opacity:.5;letter-spacing:.12em;}
+    #laptopSpecialBtn.spec-ready{border-color:#f7d98a;background:rgba(247,217,138,0.18);color:#f7d98a;box-shadow:0 0 18px rgba(247,217,138,.6),0 0 40px rgba(247,217,138,.25),inset 0 0 12px rgba(247,217,138,.1);animation:laptopSpecPulse 1s ease-in-out infinite alternate;}
+    @keyframes laptopSpecPulse{from{box-shadow:0 0 14px rgba(247,217,138,.5),0 0 30px rgba(247,217,138,.2);}to{box-shadow:0 0 28px rgba(247,217,138,.9),0 0 60px rgba(247,217,138,.4);}}
+    .laptop-key-hint{display:flex;gap:.5rem;opacity:.28;pointer-events:none;}
+    .laptop-key-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:.12rem .42rem;font-size:.58rem;font-weight:700;letter-spacing:.07em;white-space:nowrap;}
+    #phoneControls{position:fixed;bottom:0;left:0;right:0;height:200px;z-index:50;display:none;pointer-events:none;background:linear-gradient(to top,rgba(4,3,16,.70) 0%,rgba(4,3,16,.35) 50%,transparent 100%);padding:0 12px 12px 12px;box-sizing:border-box;}
+    #dpad{position:absolute;bottom:20px;left:32px;pointer-events:all;display:flex;flex-direction:column;gap:12px;}
+    .dpad-row{display:flex;gap:8px;align-items:center;}
+    .dpad-top-row{justify-content:center;}
+    .dpad-bottom-row{justify-content:space-between;width:120px;}
+    .dpad-spacer{width:52px;height:52px;}
+    .dpad-btn{width:52px;height:52px;background:rgba(60,100,180,.20);border:2px solid rgba(163,212,247,.35);border-radius:6px;color:#a3d4f7;font-size:1.2rem;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;touch-action:none;transition:all .1s ease;}
+    .dpad-btn:active,.dpad-btn.pressed{background:rgba(100,160,255,.50);border-color:rgba(163,212,247,.90);transform:scale(.88);box-shadow:0 0 14px rgba(163,212,247,.70),inset 0 0 6px rgba(255,255,255,.10);}
+    #actionPad{position:absolute;bottom:12px;right:12px;pointer-events:all;width:170px;height:190px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;}
+    .action-btn{position:absolute;width:65px;height:65px;border-radius:50%;border:2.2px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.6rem;-webkit-tap-highlight-color:transparent;user-select:none;touch-action:none;backdrop-filter:blur(8px);transition:all .1s ease;}
+    .action-btn .ab-icon{font-size:1.8rem;line-height:1;}
+    .action-btn .ab-label{font-size:0;}
+    .action-btn:active{transform:scale(.82)!important;}
+    #phoneSpecialBtn{top:0;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,rgba(247,217,138,.18),rgba(255,200,100,.10));border-color:rgba(247,217,138,.30);color:rgba(247,217,138,.50);box-shadow:0 0 12px rgba(247,217,138,.15),0 6px 12px rgba(0,0,0,.25);}
+    #phoneSpecialBtn.spec-ready{background:linear-gradient(135deg,rgba(247,217,138,.38),rgba(255,220,150,.28));border-color:rgba(247,217,138,.80);color:#f7d98a;box-shadow:0 0 20px rgba(247,217,138,.70),0 0 40px rgba(247,217,138,.30),0 6px 12px rgba(0,0,0,.25);animation:phoneSpecPulse .85s ease-in-out infinite alternate;}
+    @keyframes phoneSpecPulse{from{box-shadow:0 0 16px rgba(247,217,138,.5),0 0 32px rgba(247,217,138,.20),0 6px 12px rgba(0,0,0,.25);}to{box-shadow:0 0 26px rgba(247,217,138,.90),0 0 50px rgba(247,217,138,.45),0 6px 12px rgba(0,0,0,.25);}}
+    #phoneSpecialBtn:active{transform:translateX(-50%) scale(.82)!important;}
+    #phoneDefendBtn{bottom:0;left:0;background:linear-gradient(135deg,rgba(80,120,255,.25),rgba(100,140,255,.15));border-color:rgba(140,180,255,.50);color:#a3d4f7;box-shadow:0 0 12px rgba(100,140,255,.25),0 6px 12px rgba(0,0,0,.25);}
+    #phoneDefendBtn:active,#phoneDefendBtn.active{background:linear-gradient(135deg,rgba(100,160,255,.60),rgba(120,180,255,.50));border-color:rgba(180,210,255,.90);box-shadow:0 0 18px rgba(100,160,255,.65),0 0 35px rgba(100,160,255,.30),0 6px 12px rgba(0,0,0,.3);}
+    #phoneAttackBtn{bottom:0;right:0;background:linear-gradient(135deg,rgba(240,60,90,.25),rgba(247,96,122,.15));border-color:rgba(247,130,150,.50);color:#f7a3b8;box-shadow:0 0 12px rgba(247,96,122,.25),0 6px 12px rgba(0,0,0,.25);}
+    #phoneAttackBtn:active{background:linear-gradient(135deg,rgba(255,100,130,.60),rgba(255,130,160,.50));border-color:rgba(255,170,190,.90);box-shadow:0 0 18px rgba(247,96,122,.65),0 0 35px rgba(247,96,122,.30),0 6px 12px rgba(0,0,0,.3);}
+    .control-panel{display:none!important;}
+    .key-hint{display:none!important;}
+    #fullscreenBtn{position:fixed;top:12px;right:12px;z-index:51;display:none;width:44px;height:44px;border:1.5px solid rgba(255,255,255,.25);border-radius:50%;background:rgba(10,8,28,.7);color:rgba(255,255,255,.6);font-size:1.2rem;cursor:pointer;backdrop-filter:blur(8px);transition:all .2s;-webkit-tap-highlight-color:transparent;align-items:center;justify-content:center;}
+    @media (max-width:768px){#fullscreenBtn{display:flex;}}
+    #fullscreenBtn:active{transform:scale(0.85);background:rgba(100,140,255,.3);border-color:rgba(100,140,255,.6);color:rgba(150,190,255,.9);}
+    @media (max-width:600px) and (orientation:landscape){
+      .select-title{font-size:1.4rem;}.select-sub{font-size:.7rem;margin-top:-.4rem;}.char-cards{gap:1.2rem;}
+      .char-card{width:155px;padding:1rem 1rem .9rem;gap:.45rem;}.char-sprite{width:80px;height:80px;}
+      .char-name{font-size:.85rem;}.char-desc{font-size:.62rem;}.char-stat-box{display:none;}
+      .special-tag{font-size:.58rem;padding:.15rem .5rem;}.select-hint{font-size:.6rem;max-width:90vw;}
     }
-    #laptopSpecialBtn {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.22);
-      background: rgba(255,255,255,0.07);
-      color: rgba(255,255,255,0.4);
-      font-family: 'Orbitron', sans-serif;
-      font-size: .65rem;
-      font-weight: 900;
-      letter-spacing: .06em;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      transition: all .3s cubic-bezier(.22,1,.36,1);
-      -webkit-tap-highlight-color: transparent;
-    }
-    #laptopSpecialBtn .spec-icon { font-size: 1.3rem; line-height: 1; }
-    #laptopSpecialBtn .spec-key {
-      font-size: .52rem;
-      opacity: .5;
-      letter-spacing: .12em;
-    }
-    #laptopSpecialBtn.spec-ready {
-      border-color: #f7d98a;
-      background: rgba(247,217,138,0.18);
-      color: #f7d98a;
-      box-shadow: 0 0 18px rgba(247,217,138,.6), 0 0 40px rgba(247,217,138,.25), inset 0 0 12px rgba(247,217,138,.1);
-      animation: laptopSpecPulse 1s ease-in-out infinite alternate;
-    }
-    @keyframes laptopSpecPulse {
-      from { box-shadow: 0 0 14px rgba(247,217,138,.5), 0 0 30px rgba(247,217,138,.2); }
-      to   { box-shadow: 0 0 28px rgba(247,217,138,.9), 0 0 60px rgba(247,217,138,.4); }
-    }
-    .laptop-key-hint {
-      display: flex;
-      gap: .5rem;
-      opacity: .28;
-      pointer-events: none;
-    }
-    .laptop-key-chip {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 6px;
-      padding: .12rem .42rem;
-      font-size: .58rem;
-      font-weight: 700;
-      letter-spacing: .07em;
-      white-space: nowrap;
-    }
-
-    /* ══════════════════════════════════════
-       PHONE CONTROLS — OPTIMIZED
-       LEFT: D-Pad for movement (easy to play)
-       RIGHT: Rounded buttons for D, A, S
-       ══════════════════════════════════════ */
-
-    #phoneControls {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 200px;
-      z-index: 50;
-      display: none;
-      pointer-events: none;
-      background: linear-gradient(to top, rgba(4,3,16,.70) 0%, rgba(4,3,16,.35) 50%, transparent 100%);
-      padding: 0 12px 12px 12px;
-      box-sizing: border-box;
-    }
-
-    /* ── D-PAD BUTTONS (LEFT SIDE) ── */
-    #dpad {
-      position: absolute;
-      bottom: 20px;
-      left: 32px;
-      pointer-events: all;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .dpad-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .dpad-top-row {
-      justify-content: center;
-    }
-
-    .dpad-bottom-row {
-      justify-content: space-between;
-      width: 120px; /* 52px button + 8px gap + 52px spacer + 8px gap + 52px button */
-    }
-
-    .dpad-spacer {
-      width: 52px;
-      height: 52px;
-    }
-
-    .dpad-btn {
-      width: 52px;
-      height: 52px;
-      background: rgba(60,100,180,.20);
-      border: 2px solid rgba(163,212,247,.35);
-      border-radius: 6px;
-      color: #a3d4f7;
-      font-size: 1.2rem;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-      touch-action: none;
-      transition: all .1s ease;
-    }
-
-    .dpad-btn:active,
-    .dpad-btn.pressed {
-      background: rgba(100,160,255,.50);
-      border-color: rgba(163,212,247,.90);
-      transform: scale(.88);
-      box-shadow: 0 0 14px rgba(163,212,247,.70), inset 0 0 6px rgba(255,255,255,.10);
-    }
-
-    /* ── ROUNDED ACTION BUTTONS (RIGHT SIDE) ── */
-    /* Layout: S on top, D on bottom-left, A on bottom-right */
-    #actionPad {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      pointer-events: all;
-      width: 170px;
-      height: 190px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0;
-    }
-
-    .action-btn {
-      position: absolute;
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      border: 2.2px solid transparent;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      cursor: pointer;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
-      font-size: 1.6rem;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-      touch-action: none;
-      backdrop-filter: blur(8px);
-      transition: all .1s ease;
-    }
-
-    .action-btn .ab-icon { font-size: 1.8rem; line-height: 1; }
-    .action-btn .ab-label { font-size: 0; }
-    .action-btn:active { transform: scale(.82) !important; }
-
-    /* SPECIAL (S) — Gold, Top Position */
-    #phoneSpecialBtn {
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, rgba(247,217,138,.18), rgba(255,200,100,.10));
-      border-color: rgba(247,217,138,.30);
-      color: rgba(247,217,138,.50);
-      box-shadow: 0 0 12px rgba(247,217,138,.15), 0 6px 12px rgba(0,0,0,.25);
-    }
-
-    #phoneSpecialBtn.spec-ready {
-      background: linear-gradient(135deg, rgba(247,217,138,.38), rgba(255,220,150,.28));
-      border-color: rgba(247,217,138,.80);
-      color: #f7d98a;
-      box-shadow: 0 0 20px rgba(247,217,138,.70), 0 0 40px rgba(247,217,138,.30), 0 6px 12px rgba(0,0,0,.25);
-      animation: phoneSpecPulse .85s ease-in-out infinite alternate;
-    }
-
-    @keyframes phoneSpecPulse {
-      from { 
-        box-shadow: 0 0 16px rgba(247,217,138,.5), 0 0 32px rgba(247,217,138,.20), 0 6px 12px rgba(0,0,0,.25); 
-      }
-      to { 
-        box-shadow: 0 0 26px rgba(247,217,138,.90), 0 0 50px rgba(247,217,138,.45), 0 6px 12px rgba(0,0,0,.25);
-      }
-    }
-
-    #phoneSpecialBtn:active {
-      transform: translateX(-50%) scale(.82) !important;
-    }
-
-    /* DEFEND (D) — Blue, Bottom-Left */
-    #phoneDefendBtn {
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(135deg, rgba(80,120,255,.25), rgba(100,140,255,.15));
-      border-color: rgba(140,180,255,.50);
-      color: #a3d4f7;
-      box-shadow: 0 0 12px rgba(100,140,255,.25), 0 6px 12px rgba(0,0,0,.25);
-    }
-
-    #phoneDefendBtn:active,
-    #phoneDefendBtn.active {
-      background: linear-gradient(135deg, rgba(100,160,255,.60), rgba(120,180,255,.50));
-      border-color: rgba(180,210,255,.90);
-      box-shadow: 0 0 18px rgba(100,160,255,.65), 0 0 35px rgba(100,160,255,.30), 0 6px 12px rgba(0,0,0,.3);
-    }
-
-    /* ATTACK (A) — Red/Pink, Bottom-Right */
-    #phoneAttackBtn {
-      bottom: 0;
-      right: 0;
-      background: linear-gradient(135deg, rgba(240,60,90,.25), rgba(247,96,122,.15));
-      border-color: rgba(247,130,150,.50);
-      color: #f7a3b8;
-      box-shadow: 0 0 12px rgba(247,96,122,.25), 0 6px 12px rgba(0,0,0,.25);
-    }
-
-    #phoneAttackBtn:active {
-      background: linear-gradient(135deg, rgba(255,100,130,.60), rgba(255,130,160,.50));
-      border-color: rgba(255,170,190,.90);
-      box-shadow: 0 0 18px rgba(247,96,122,.65), 0 0 35px rgba(247,96,122,.30), 0 6px 12px rgba(0,0,0,.3);
-    }
-
-    /* Old control panel — hidden always now */
-    .control-panel { display: none !important; }
-    .key-hint { display: none !important; }
-
-    /* ── FULLSCREEN BUTTON ── */
-    #fullscreenBtn {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      z-index: 51;
-      display: none;
-      width: 44px;
-      height: 44px;
-      border: 1.5px solid rgba(255,255,255,.25);
-      border-radius: 50%;
-      background: rgba(10,8,28,.7);
-      color: rgba(255,255,255,.6);
-      font-size: 1.2rem;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: all .2s;
-      -webkit-tap-highlight-color: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    @media (max-width: 768px) {
-      #fullscreenBtn {
-        display: flex;
-      }
-    }
-    #fullscreenBtn:active {
-      transform: scale(0.85);
-      background: rgba(100,140,255,.3);
-      border-color: rgba(100,140,255,.6);
-      color: rgba(150,190,255,.9);
-    }
-
-    /* ── MOBILE SELECT SCREEN FIX ── */
-    @media (max-width: 600px) and (orientation: landscape) {
-      .select-title { font-size: 1.4rem; }
-      .select-sub   { font-size: .7rem; margin-top: -.4rem; }
-      .char-cards   { gap: 1.2rem; }
-      .char-card    { width: 155px; padding: 1rem 1rem .9rem; gap: .45rem; }
-      .char-sprite  { width: 80px; height: 80px; }
-      .char-name    { font-size: .85rem; }
-      .char-desc    { font-size: .62rem; }
-      .char-stat-box{ display: none; }
-      .special-tag  { font-size: .58rem; padding: .15rem .5rem; }
-      .select-hint  { font-size: .6rem; max-width: 90vw; }
-    }
-
-    /* ── GAME OVER ── */
     #gameOver{position:fixed;inset:0;display:none;z-index:200;align-items:center;justify-content:center;background:rgba(4,3,12,.44);backdrop-filter:blur(5px);}
     .go-card{background:rgba(9,8,20,.93);border:1px solid var(--border);border-radius:22px;padding:2.5rem 3rem;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.7);animation:go-in .4s cubic-bezier(.22,1,.36,1);}
     @keyframes go-in{from{transform:scale(.8) translateY(30px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
@@ -546,14 +191,8 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-     FULLSCREEN BUTTON
-     ══════════════════════════════════ -->
 <button id="fullscreenBtn" onclick="requestFullscreen()" title="Toggle Fullscreen">⛶</button>
 
-<!-- ══════════════════════════════════
-     ROTATE OVERLAY (phones in portrait)
-     ══════════════════════════════════ -->
 <div id="rotateOverlay">
   <div class="rotate-icon">📱</div>
   <div class="rotate-title">Rotate to Play</div>
@@ -568,7 +207,6 @@
 <div id="arenaBg"></div>
 <canvas id="shardCanvas"></canvas>
 
-<!-- ── WAV AUDIO ELEMENTS ── -->
 <audio id="sfx_char_select"    src="character_select.wav"  preload="auto"></audio>
 <audio id="sfx_health_recharge" src="health_recharge.wav"  preload="auto"></audio>
 <audio id="sfx_man_lastbreath" src="man_lastbreath.wav"    preload="auto"></audio>
@@ -579,7 +217,6 @@
 <audio id="sfx_women_pain"     src="women_pain.wav"        preload="auto"></audio>
 <audio id="sfx_women_random"   src="women_random.wav"      preload="auto"></audio>
 
-<!-- ── CHARACTER SELECT ── -->
 <div id="selectScreen">
   <div class="select-title">Anime Duel Arena</div>
   <div class="select-sub">Choose Your Fighter</div>
@@ -589,20 +226,19 @@
       <div class="char-name" style="color:#a8edca">✦ VELA</div>
       <div class="char-desc">Nature's guardian.<br>Swift strikes &amp; healing arts.</div>
       <div class="special-tag">🌿 Special: Leaf Drain</div>
-      <div class="char-stat-box">Steals 3 HP/hit × 5 ticks<br>Leaf rain for 2s first · Cooldown 10s</div>
+      <div class="char-stat-box">Steals 9 HP/hit × 5 ticks<br>Leaf rain for 2s first · Cooldown 10s</div>
     </div>
     <div class="char-card glok-card" onclick="chooseCharacter('glok')">
       <img class="char-sprite" src="glok.png" alt="Glok">
       <div class="char-name" style="color:#f7a3b8">GLOK ✦</div>
       <div class="char-desc">Shadow stalker.<br>Teleports &amp; freezes foes.</div>
       <div class="special-tag">👁 Special: Shadow Rift</div>
-      <div class="char-stat-box">Teleport behind enemy · Freeze 3s<br>30 damage instant · Cooldown 10s</div>
+      <div class="char-stat-box">Teleport behind enemy · Freeze 0.5s<br>60 damage instant · Cooldown 10s</div>
     </div>
   </div>
   <div class="select-hint" id="selectHint">S = Special Move &nbsp;|&nbsp; A = Attack &nbsp;|&nbsp; D = Hold to Defend &nbsp;|&nbsp; ← → Move &nbsp;|&nbsp; ↑ or Space = Jump</div>
 </div>
 
-<!-- ── HUD ── -->
 <div class="hud" id="gameHud" style="display:none">
   <div class="fighter-hud">
     <div class="fighter-name" id="p1Name" style="color:#a8edca">✦ VELA</div>
@@ -653,7 +289,6 @@
 <div id="screenCrack"></div>
 <div id="dangerVignette"></div>
 
-<!-- ── COUNTDOWN OVERLAY ── -->
 <div id="countdownOverlay"></div>
 <div id="countdown" class="">
   <span class="countdown-num num-3" id="cdNum3">3</span>
@@ -662,7 +297,6 @@
   <span class="countdown-num num-fight" id="cdFight">FIGHT!</span>
 </div>
 
-<!-- Old control panel (hidden via CSS) -->
 <div class="control-panel" id="controlPanel">
   <button class="ctrl-btn" id="leftBtn"></button>
   <button class="ctrl-btn jump-btn" id="jumpBtn"></button>
@@ -673,7 +307,6 @@
 </div>
 <div class="key-hint" id="keyHint"></div>
 
-<!-- ── LAPTOP SPECIAL BUTTON ── -->
 <div id="laptopSpecialWrap">
   <button id="laptopSpecialBtn">
     <span class="spec-icon">✨</span>
@@ -688,9 +321,7 @@
   </div>
 </div>
 
-<!-- ── PHONE CONTROLS ── -->
 <div id="phoneControls">
-  <!-- LEFT: D-PAD buttons (up above, left/right below) -->
   <div id="dpad">
     <div class="dpad-row dpad-top-row">
       <div class="dpad-btn" id="dpadUp">▲</div>
@@ -701,8 +332,6 @@
       <div class="dpad-btn" id="dpadRight">▶</div>
     </div>
   </div>
-
-  <!-- RIGHT: Action buttons (D, A, S) -->
   <div id="actionPad">
     <button class="action-btn" id="phoneSpecialBtn">
       <span class="ab-icon">S</span>
@@ -731,126 +360,77 @@
 
 <script>
 /* ════════════════════════
-   ORIENTATION LOCK FOR PHONES
+   ORIENTATION LOCK
 ════════════════════════ */
 const rotateOverlay = document.getElementById('rotateOverlay');
-
-function checkOrientation() {
-  const phone = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    || (window.innerWidth < 900 && 'ontouchstart' in window);
-
-  if (!phone) {
-    rotateOverlay.style.display = 'none';
-    return;
-  }
-
-  const isPortrait = window.innerHeight > window.innerWidth;
-  rotateOverlay.style.display = isPortrait ? 'flex' : 'none';
+function checkOrientation(){
+  const phone=/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)||(window.innerWidth<900&&'ontouchstart' in window);
+  if(!phone){rotateOverlay.style.display='none';return;}
+  rotateOverlay.style.display=window.innerHeight>window.innerWidth?'flex':'none';
 }
-
-// Check on load
 checkOrientation();
-
-// Check whenever orientation/resize changes
-window.addEventListener('resize', checkOrientation);
-window.addEventListener('orientationchange', () => {
-  // Small delay to let the browser finish the rotation
-  setTimeout(checkOrientation, 150);
-});
-
-// Screen Orientation API (modern browsers)
-if (screen.orientation) {
-  screen.orientation.addEventListener('change', () => {
-    setTimeout(checkOrientation, 150);
-  });
-}
+window.addEventListener('resize',checkOrientation);
+window.addEventListener('orientationchange',()=>setTimeout(checkOrientation,150));
+if(screen.orientation)screen.orientation.addEventListener('change',()=>setTimeout(checkOrientation,150));
 
 /* ════════════════════════
    DEVICE DETECTION
 ════════════════════════ */
 function isPhone(){
-  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    || (window.innerWidth < 768 && 'ontouchstart' in window);
+  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)||(window.innerWidth<768&&'ontouchstart' in window);
 }
-let IS_PHONE = isPhone();
+let IS_PHONE=isPhone();
 
 /* ════════════════════════
-   FULLSCREEN SUPPORT
+   FULLSCREEN
 ════════════════════════ */
-function requestFullscreen() {
-  const elem = document.documentElement;
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen().catch(err => console.log('Fullscreen denied:', err));
-  } else if (elem.webkitRequestFullscreen) {
-    elem.webkitRequestFullscreen();
-  } else if (elem.mozRequestFullScreen) {
-    elem.mozRequestFullScreen();
-  } else if (elem.msRequestFullscreen) {
-    elem.msRequestFullscreen();
-  }
+function requestFullscreen(){
+  const e=document.documentElement;
+  if(e.requestFullscreen)e.requestFullscreen().catch(()=>{});
+  else if(e.webkitRequestFullscreen)e.webkitRequestFullscreen();
+  else if(e.mozRequestFullScreen)e.mozRequestFullScreen();
+  else if(e.msRequestFullscreen)e.msRequestFullscreen();
 }
-
-// Request fullscreen on first user interaction if on phone
-function tryFullscreenOnce() {
-  if (IS_PHONE && !document.fullscreenElement && !document.webkitFullscreenElement) {
-    requestFullscreen();
-  }
+function tryFullscreenOnce(){
+  if(IS_PHONE&&!document.fullscreenElement&&!document.webkitFullscreenElement)requestFullscreen();
 }
-
-// Listen for fullscreen changes
-document.addEventListener('fullscreenchange', handleFullscreenChange);
-document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-document.addEventListener('mozfullscreenchange', handleFullscreenChange);
-document.addEventListener('msfullscreenchange', handleFullscreenChange);
-
-function handleFullscreenChange() {
-  // Resize canvas and adjust UI if needed
-  resizeCanvas();
-}
+document.addEventListener('fullscreenchange',()=>resizeCanvas());
+document.addEventListener('webkitfullscreenchange',()=>resizeCanvas());
 
 function initControls(){
   if(IS_PHONE){
-    document.getElementById('phoneControls').style.display = 'block';
-    document.getElementById('laptopSpecialWrap').style.display = 'none';
-    document.getElementById('selectHint').textContent = 'D-pad = Move/Jump · ATK = Attack · DEF = Hold Defend · SPEC = Special';
-    // Request fullscreen when game starts on phone
-    setTimeout(() => tryFullscreenOnce(), 100);
-  } else {
-    document.getElementById('phoneControls').style.display = 'none';
-    document.getElementById('laptopSpecialWrap').style.display = 'flex';
+    document.getElementById('phoneControls').style.display='block';
+    document.getElementById('laptopSpecialWrap').style.display='none';
+    document.getElementById('selectHint').textContent='D-pad = Move/Jump · ATK = Attack · DEF = Hold Defend · SPEC = Special';
+    setTimeout(()=>tryFullscreenOnce(),100);
+  }else{
+    document.getElementById('phoneControls').style.display='none';
+    document.getElementById('laptopSpecialWrap').style.display='flex';
   }
 }
 
 /* ════════════════════════
-   WAV SFX PLAYER
+   WAV SFX
 ════════════════════════ */
-function playSFX(id, volume=1.0){
-  const el=document.getElementById(id);
-  if(!el)return;
-  try{
-    const clone=el.cloneNode();
-    clone.volume=Math.min(1,Math.max(0,volume));
-    clone.play().catch(()=>{});
-    clone.addEventListener('ended',()=>clone.remove(),{once:true});
-  }catch(e){}
+function playSFX(id,volume=1.0){
+  const el=document.getElementById(id);if(!el)return;
+  try{const c=el.cloneNode();c.volume=Math.min(1,Math.max(0,volume));c.play().catch(()=>{});c.addEventListener('ended',()=>c.remove(),{once:true});}catch(e){}
 }
 
 /* ════════════════════════
-   RANDOM CHATTER SYSTEM
+   RANDOM CHATTER
 ════════════════════════ */
 let randomChatterCount=0;
 const RANDOM_CHATTER_TOTAL=20;
 let randomChatterTimer=null;
-
 function scheduleNextChatter(){
   if(randomChatterCount>=RANDOM_CHATTER_TOTAL||over)return;
-  const delay=3000+Math.random()*5000;
   randomChatterTimer=setTimeout(()=>{
     if(over||!gameOn)return;
     randomChatterCount++;
-    playSFX(Math.random()<0.5?'sfx_man_random':'sfx_women_random', 0.55);
+    playSFX(Math.random()<0.5?'sfx_man_random':'sfx_women_random',0.55);
     scheduleNextChatter();
-  },delay);
+  },3000+Math.random()*5000);
 }
 
 /* ════════════════════════
@@ -899,7 +479,7 @@ function bigFX(xVw,yVh){const x=xVw/100*window.innerWidth,y=yVh/100*window.inner
 function smallFX(xVw,yVh,col){const x=xVw/100*window.innerWidth,y=yVh/100*window.innerHeight;spawnShards(x,y,7,false);spawnClashBurst(x,y,false);spawnRing(x,y,col);flashScreen('rgba(247,96,122,0.12)');}
 
 /* ════════════════════════
-   SYNTH AUDIO (Web Audio API)
+   SYNTH AUDIO
 ════════════════════════ */
 const AC=new(window.AudioContext||window.webkitAudioContext)();
 let bgStarted=false;
@@ -921,34 +501,17 @@ function playLeafDrain(){
 }
 function playHeal(){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone('sine',f,.13,.4),i*110));}
 function resumeAudio(){if(AC.state==='suspended')AC.resume();startBG();}
-
 function playCountdownBeep(isFight){
   if(AC.state==='suspended')AC.resume();
   if(isFight){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone('sine',f,.22,.5),i*55));tone('sawtooth',220,.08,.7);}
   else{tone('square',660,.20,.14);tone('sine',440,.12,.18);}
 }
-
 ['mousedown','keydown','touchstart'].forEach(e=>document.addEventListener(e,resumeAudio,{once:true}));
-
-// Also request fullscreen on first user interaction for phones
-if(IS_PHONE) {
+if(IS_PHONE){
   ['touchstart','click'].forEach(e=>document.addEventListener(e,tryFullscreenOnce,{once:true}));
+  window.addEventListener('load',()=>setTimeout(()=>requestFullscreen(),500));
 }
-
-// Auto-fullscreen on page load for phones (no user friction)
-if(IS_PHONE) {
-  window.addEventListener('load', () => {
-    setTimeout(() => requestFullscreen(), 500);
-  });
-}
-
-// Fullscreen toggle on F key (standard)
-document.addEventListener('keydown', (e) => {
-  if(e.key === 'f' || e.key === 'F') {
-    requestFullscreen();
-  }
-});
-
+document.addEventListener('keydown',(e)=>{if(e.key==='f'||e.key==='F')requestFullscreen();});
 
 /* ════════════════════════
    CONSTANTS
@@ -961,8 +524,7 @@ const STAM_REGEN=3.0,STAM_TICK=290,SHIELD_MS=10000,SPEC_CD=10000,MAX_HP=300;
    STATE
 ════════════════════════ */
 let pChar='vela',gameOn=false;
-// Player character will be 'vela' or 'glok', bot will be the other
-let playerChar='vela',botChar='glok';  // These get set by chooseCharacter()
+let playerChar='vela',botChar='glok';
 let velaHP=MAX_HP,glokHP=MAX_HP;
 let velaX=5,glokX=72,glokTgtX=72;
 let velaDir=1,glokDir=-1;
@@ -985,8 +547,7 @@ let lastPAtk=0,consHits=0,botFlank=1;
 const BOT_TICK=55;let lastBTick=0;
 let botSmooth=0.12;
 let botActive=false;
-
-let glokLastBreathPlayed=false;
+let lastBreathPlayed=false;
 
 /* ════════════════════════
    ELEMENTS
@@ -999,64 +560,47 @@ const timerEl=document.getElementById('roundTimer');
 const gameOverEl=document.getElementById('gameOver'),goTitleEl=document.getElementById('goTitle'),goSubEl=document.getElementById('goSub');
 const comboEl=document.getElementById('comboDisplay'),statusEl=document.getElementById('statusBadge'),dangerEl=document.getElementById('dangerVignette');
 const vDC=document.getElementById('velaDefenseCircle'),gDC=document.getElementById('glokDefenseCircle');
-const atkBtn=document.getElementById('attackBtn'),defBtn=document.getElementById('defendBtn'),specBtn=document.getElementById('specialBtn');
 const shldBnr=document.getElementById('shieldBanner'),shldTxt=document.getElementById('shieldBannerText');
 const shldWrap=document.getElementById('shieldCountdownWrap'),shldBar=document.getElementById('shieldCountdownBar');
 const specBnr=document.getElementById('specialBanner');
 const holeEl=document.getElementById('teleportHole');
 const deptHoleEl=document.getElementById('departureHole');
 const iceEl=document.getElementById('iceBox');
-// These will be reassigned in chooseCharacter
 const vPip=document.getElementById('velaSpecialPip'),gPip=document.getElementById('glokSpecialPip');
-
-const laptopSpecBtn = document.getElementById('laptopSpecialBtn');
-const phoneSpecBtn = document.getElementById('phoneSpecialBtn');
+const laptopSpecBtn=document.getElementById('laptopSpecialBtn');
+const phoneSpecBtn=document.getElementById('phoneSpecialBtn');
 
 /* ════════════════════════
-   COUNTDOWN SEQUENCE
+   COUNTDOWN
 ════════════════════════ */
 function runCountdown(onComplete){
-  const overlay=document.getElementById('countdownOverlay');
-  const wrap=document.getElementById('countdown');
-  const n3=document.getElementById('cdNum3');
-  const n2=document.getElementById('cdNum2');
-  const n1=document.getElementById('cdNum1');
-  const nF=document.getElementById('cdFight');
+  const overlay=document.getElementById('countdownOverlay'),wrap=document.getElementById('countdown');
+  const n3=document.getElementById('cdNum3'),n2=document.getElementById('cdNum2'),n1=document.getElementById('cdNum1'),nF=document.getElementById('cdFight');
   [n3,n2,n1,nF].forEach(el=>{el.className=el.className.replace(/\banim\b|\banim-fight\b/g,'').trim();el.style.opacity='0';});
-  overlay.classList.add('active');
-  wrap.classList.add('active');
+  overlay.classList.add('active');wrap.classList.add('active');
   function showNum(el,isFight,delay,duration){
     return new Promise(resolve=>{
-      setTimeout(()=>{
-        playCountdownBeep(isFight);
-        flashScreen(isFight?'rgba(247,217,138,0.18)':'rgba(255,255,255,0.10)');
-        el.classList.add(isFight?'anim-fight':'anim');
-        setTimeout(resolve, duration);
-      }, delay);
+      setTimeout(()=>{playCountdownBeep(isFight);flashScreen(isFight?'rgba(247,217,138,0.18)':'rgba(255,255,255,0.10)');el.classList.add(isFight?'anim-fight':'anim');setTimeout(resolve,duration);},delay);
     });
   }
-  showNum(n3,false,0,900)
-    .then(()=>showNum(n2,false,100,900))
-    .then(()=>showNum(n1,false,100,900))
-    .then(()=>showNum(nF,true,100,1200))
-    .then(()=>{
-      setTimeout(()=>{overlay.classList.remove('active');wrap.classList.remove('active');},200);
-      setTimeout(()=>{botActive=true;},2000);
-      onComplete();
-    });
+  showNum(n3,false,0,900).then(()=>showNum(n2,false,100,900)).then(()=>showNum(n1,false,100,900)).then(()=>showNum(nF,true,100,1200)).then(()=>{
+    setTimeout(()=>{overlay.classList.remove('active');wrap.classList.remove('active');},200);
+    setTimeout(()=>{botActive=true;},2000);
+    onComplete();
+  });
 }
 
 /* ════════════════════════
-   HEALTH BAR INTRO ANIMATION
+   HEALTH BAR INTRO
 ════════════════════════ */
 function playHealthBarIntro(){
   velaBarEl.style.width='0%';glokBarEl.style.width='0%';
-  playSFX('sfx_health_recharge', 0.8);
+  playSFX('sfx_health_recharge',0.8);
   setTimeout(()=>{
     velaBarEl.style.transition='width 1.2s cubic-bezier(.22,1,.36,1)';
     glokBarEl.style.transition='width 1.2s cubic-bezier(.22,1,.36,1)';
     velaBarEl.style.width='100%';glokBarEl.style.width='100%';
-  }, 150);
+  },150);
   setTimeout(()=>{velaBarEl.style.transition='width .22s ease';glokBarEl.style.transition='width .22s ease';},1500);
 }
 
@@ -1064,22 +608,17 @@ function playHealthBarIntro(){
    CHAR SELECT
 ════════════════════════ */
 function chooseCharacter(ch){
-  playSFX('sfx_char_select', 0.85);
+  playSFX('sfx_char_select',0.85);
   pChar=ch;
-  // SET PLAYER AND BOT CHARACTERS - NO CONFUSION
-  playerChar = ch;
-  botChar = (ch === 'vela') ? 'glok' : 'vela';
-  
+  playerChar=ch;
+  botChar=(ch==='vela')?'glok':'vela';
+
   document.getElementById('selectScreen').style.display='none';
   document.getElementById('gameHud').style.display='flex';
   velaEl.style.display='';glokEl.style.display='';
   initControls();
-  
-  // Trigger fullscreen on phones immediately
-  if(IS_PHONE) {
-    setTimeout(() => requestFullscreen(), 50);
-  }
-  
+  if(IS_PHONE)setTimeout(()=>requestFullscreen(),50);
+
   if(ch==='vela'){
     velaX=6;glokX=72;glokTgtX=72;velaDir=1;glokDir=-1;
     document.getElementById('p1Name').textContent='✦ VELA';
@@ -1104,34 +643,61 @@ function chooseCharacter(ch){
 }
 
 /* ════════════════════════
-   UI
+   UI HELPERS
 ════════════════════════ */
 function setHP(who,v){
   if(who==='vela'){
+    const prev=velaHP;
     velaHP=Math.max(0,Math.min(MAX_HP,v));
     velaBarEl.style.width=(velaHP/MAX_HP*100)+'%';
     velaHpTxt.textContent=Math.ceil(velaHP)+' HP';
-    if(pChar==='vela')dangerEl.style.opacity=velaHP<80?(1-velaHP/80)*.8:0;
+    // Danger vignette only for the player's character
+    if(playerChar==='vela')dangerEl.style.opacity=velaHP<80?(1-velaHP/80)*.8:0;
+    // "Last breath" SFX: play when the bot character drops below 50 HP
+    // FIX: was always tied to glok; now tied to botChar
+    if(botChar==='vela'&&!lastBreathPlayed&&velaHP<50&&prev>=50){
+      lastBreathPlayed=true;playSFX('sfx_man_lastbreath',0.75);
+    }
   }else{
-    const prevGlokHP=glokHP;
+    const prev=glokHP;
     glokHP=Math.max(0,Math.min(MAX_HP,v));
     glokBarEl.style.width=(glokHP/MAX_HP*100)+'%';
     glokHpTxt.textContent=Math.ceil(glokHP)+' HP';
-    if(pChar==='glok')dangerEl.style.opacity=glokHP<80?(1-glokHP/80)*.8:0;
-    if(!glokLastBreathPlayed&&glokHP<50&&prevGlokHP>=50){glokLastBreathPlayed=true;playSFX('sfx_man_lastbreath', 0.75);}
+    if(playerChar==='glok')dangerEl.style.opacity=glokHP<80?(1-glokHP/80)*.8:0;
+    if(botChar==='glok'&&!lastBreathPlayed&&glokHP<50&&prev>=50){
+      lastBreathPlayed=true;playSFX('sfx_man_lastbreath',0.75);
+    }
   }
 }
-function setSt(who,v){if(who==='p'){pStam=Math.max(0,Math.min(100,v));velaStEl.style.width=pStam+'%';}else{bStam=Math.max(0,Math.min(100,v));glokStEl.style.width=bStam+'%';}}
+
+// Stamina bars: 'p' = player's bar, 'b' = bot's bar
+// FIX: stamina bars were always tied to vela/glok elements regardless of who is player.
+// We use the velaStamina element for whoever is on the LEFT HUD (p1) and glokStamina for RIGHT HUD (p2).
+// Since p1Name = player and p2Name = bot, velaStamina tracks player stamina and glokStamina tracks bot stamina
+// regardless of character. This matches how the HUD is set up.
+function setSt(who,v){
+  if(who==='p'){pStam=Math.max(0,Math.min(100,v));velaStEl.style.width=pStam+'%';}
+  else{bStam=Math.max(0,Math.min(100,v));glokStEl.style.width=bStam+'%';}
+}
+
 function showStat(txt,col='#f7d98a'){statusEl.textContent=txt;statusEl.style.color=col;statusEl.style.borderColor=col+'66';statusEl.style.opacity='1';clearTimeout(statusEl._t);statusEl._t=setTimeout(()=>{statusEl.style.opacity='0';},1400);}
 function showCombo(n){if(n<2)return;comboEl.textContent=n+'x COMBO!';comboEl.style.opacity='1';comboEl.style.fontSize=Math.min(1.4+n*.2,3.2)+'rem';clearTimeout(comboEl._t);comboEl._t=setTimeout(()=>{comboEl.style.opacity='0';},950);}
 function pose(el,p){el.classList.remove('stand','walk','hit','block','attack-anim','jumping-player','jumping-bot');el.classList.add(p);}
 
+/* ════════════════════════
+   FIX: setPip now uses playerChar to decide which HUD pip to light
+   Player always gets the left-side (velaSpecialPip) pip
+   Bot always gets the right-side (glokSpecialPip) pip
+   regardless of which character was chosen
+════════════════════════ */
 function setPip(who,rdy){
   if(who==='p'){
+    // Player is always displayed on the LEFT HUD → velaSpecialPip
     vPip.className='special-pip'+(rdy?' ready':'');
-    if(laptopSpecBtn) laptopSpecBtn.classList.toggle('spec-ready', rdy);
-    if(phoneSpecBtn) phoneSpecBtn.classList.toggle('spec-ready', rdy);
-  } else {
+    if(laptopSpecBtn)laptopSpecBtn.classList.toggle('spec-ready',rdy);
+    if(phoneSpecBtn)phoneSpecBtn.classList.toggle('spec-ready',rdy);
+  }else{
+    // Bot is always displayed on the RIGHT HUD → glokSpecialPip
     gPip.className='special-pip'+(rdy?' ready':'');
   }
 }
@@ -1148,19 +714,19 @@ function applyGT(){
 }
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
 
-const pEl=()=>pChar==='vela'?velaEl:glokEl;
-const bEl=()=>pChar==='vela'?glokEl:velaEl;
-const pX=()=>pChar==='vela'?velaX:glokX;
-const bX=()=>pChar==='vela'?glokX:velaX;
-const setPX=(v)=>{if(pChar==='vela')velaX=v;else{glokX=v;glokTgtX=v;}};
-const setBX=(v)=>{if(pChar==='vela'){glokX=v;glokTgtX=v;}else velaX=v;};
-const pH=()=>pChar==='vela'?velaHP:glokHP;
-const bH=()=>pChar==='vela'?glokHP:velaHP;
-const setPH=(v)=>setHP(pChar==='vela'?'vela':'glok',v);
-const setBH=(v)=>setHP(pChar==='vela'?'glok':'vela',v);
-const bIsVela=()=>pChar==='glok';
-// Get player and bot HP by character names
-const getCharHP=(char)=>char==='vela'?velaHP:glokHP;
+// Helper accessors — all game logic should use these, never raw velaX/glokX for player vs bot
+const pEl=()=>playerChar==='vela'?velaEl:glokEl;
+const bEl=()=>playerChar==='vela'?glokEl:velaEl;
+const pX=()=>playerChar==='vela'?velaX:glokX;
+const bX=()=>playerChar==='vela'?glokX:velaX;
+const setPX=(v)=>{if(playerChar==='vela')velaX=v;else{glokX=v;glokTgtX=v;}};
+const setBX=(v)=>{if(playerChar==='vela'){glokX=v;glokTgtX=v;}else velaX=v;};
+const pH=()=>playerChar==='vela'?velaHP:glokHP;
+const bH=()=>playerChar==='vela'?glokHP:velaHP;
+const setPH=(v)=>setHP(playerChar==='vela'?'vela':'glok',v);
+const setBH=(v)=>setHP(playerChar==='vela'?'glok':'vela',v);
+// bIsVela: true when the BOT is Vela (i.e. player chose Glok)
+const bIsVela=()=>playerChar==='glok';
 const getPlayerName=()=>playerChar==='vela'?'Vela':'Glok';
 const getBotName=()=>botChar==='vela'?'Vela':'Glok';
 
@@ -1187,12 +753,20 @@ function knockback(isVela,dir){
 function endGame(winner){
   if(over)return;over=true;
   clearTimeout(randomChatterTimer);
-  const pn=playerChar==='vela'?'Vela':'Glok',bn=botChar==='vela'?'Vela':'Glok';
+  const pn=getPlayerName(),bn=getBotName();
   goTitleEl.textContent=winner+' Wins!';
   goSubEl.textContent=winner===pn?'🌸 Victory — you mastered the duel!':winner===bn?'💔 Defeated — press Play Again!':'⚡ Draw!';
-  if(winner===pn){playSFX('sfx_man_pain', 0.85);}
-  else if(winner===bn){playSFX('sfx_women_pain', 0.85);}
-  else{if(glokHP<=0)playSFX('sfx_man_pain', 0.85);else if(velaHP<=0)playSFX('sfx_women_pain', 0.85);}
+  // FIX: play correct pain SFX based on which character lost (i.e. the loser)
+  if(winner===pn){
+    // Bot lost — play bot's pain sfx
+    playSFX(botChar==='vela'?'sfx_women_pain':'sfx_man_pain',0.85);
+  }else if(winner===bn){
+    // Player lost — play player's pain sfx
+    playSFX(playerChar==='vela'?'sfx_women_pain':'sfx_man_pain',0.85);
+  }else{
+    // Draw — play both
+    playSFX('sfx_man_pain',0.85);
+  }
   gameOverEl.style.display='flex';
 }
 
@@ -1212,8 +786,12 @@ function hideShldBnr(){
   shldBar.classList.remove('warn');shldBar.style.transition='none';shldBar.style.width='100%';
   shldBTmr=setTimeout(()=>{shldBnr.className='';},250);
 }
+
+/* ════════════════════════
+   FIX: shieldBreak — use dynamic winner names via endGame
+   'who' is 'vela' or 'glok' — the character whose shield broke
+════════════════════════ */
 function shieldBreak(who){
-  // who is 'vela' or 'glok' - the character whose shield is breaking
   if(who==='vela'){
     const p=lastBotDmg+10;
     setHP('vela',velaHP-p);
@@ -1222,7 +800,8 @@ function shieldBreak(who){
     showStat('SHIELD BROKE! -'+p+' HP 💥','#ff2244');
     pose(velaEl,'hit');
     setTimeout(()=>{if(!over&&!pDef)pose(velaEl,'stand');},350);
-    if(velaHP<=0&&!over)endGame('Glok');  // Glok wins when Vela dies
+    // Vela's shield broke → Vela died or was punished → winner is whoever is NOT Vela
+    if(velaHP<=0&&!over)endGame(playerChar==='vela'?getBotName():getPlayerName());
   }else{
     const p=DMG_MAX+10;
     setHP('glok',glokHP-p);
@@ -1231,7 +810,8 @@ function shieldBreak(who){
     showStat("GLOK'S SHIELD BROKE! -"+p+' HP 💥','#ff2244');
     pose(glokEl,'hit');
     setTimeout(()=>{if(!over&&!bDef)pose(glokEl,'stand');},350);
-    if(glokHP<=0&&!over)endGame('Vela');  // Vela wins when Glok dies
+    // Glok's shield broke → winner is whoever is NOT Glok
+    if(glokHP<=0&&!over)endGame(playerChar==='glok'?getBotName():getPlayerName());
   }
   doShake();playHit(true);
 }
@@ -1242,27 +822,34 @@ function shieldBreak(who){
 function startDef(){
   if(over||pDef||pFrozen||!gameOn)return;
   pDef=true;pDefHits=0;pose(pEl(),'block');
-  (pChar==='vela'?vDC:gDC).style.opacity='1';
-  if(IS_PHONE) document.getElementById('phoneDefendBtn').classList.add('active');
-  showShldBnr(pChar);clearTimeout(pShieldTmr);
-  pShieldTmr=setTimeout(()=>{if(!pDef)return;shieldBreak(pChar);stopDef();},SHIELD_MS);
+  (playerChar==='vela'?vDC:gDC).style.opacity='1';
+  if(IS_PHONE)document.getElementById('phoneDefendBtn').classList.add('active');
+  showShldBnr(playerChar);clearTimeout(pShieldTmr);
+  pShieldTmr=setTimeout(()=>{if(!pDef)return;shieldBreak(playerChar);stopDef();},SHIELD_MS);
 }
 function stopDef(){
   if(!pDef)return;pDef=false;clearTimeout(pShieldTmr);
-  pose(pEl(),'stand');(pChar==='vela'?vDC:gDC).style.opacity='0';
-  if(IS_PHONE) document.getElementById('phoneDefendBtn').classList.remove('active');
+  pose(pEl(),'stand');(playerChar==='vela'?vDC:gDC).style.opacity='0';
+  if(IS_PHONE)document.getElementById('phoneDefendBtn').classList.remove('active');
   hideShldBnr();
 }
 
 /* ════════════════════════
    FREEZE
+   isVela=true freezes the Vela sprite/state
+   FIX: pFrozen/bFrozen now correctly mapped based on playerChar
 ════════════════════════ */
 function freezeTarget(isVela,dur){
   const x=isVela?velaX:glokX;
   const sprPx=x/100*window.innerWidth,sw=Math.min(window.innerWidth*.15,155);
   iceEl.style.display='block';iceEl.style.left=(sprPx-22)+'px';iceEl.style.bottom='7vh';iceEl.style.width=(sw+44)+'px';iceEl.style.height='180px';
-  if(isVela){pFrozen=true;clearTimeout(pfTmr);pfTmr=setTimeout(()=>{pFrozen=false;iceEl.style.display='none';},dur);}
-  else{bFrozen=true;clearTimeout(bfTmr);bfTmr=setTimeout(()=>{bFrozen=false;iceEl.style.display='none';},dur);}
+  // FIX: map isVela to the correct frozen flag
+  const freezingPlayer=(isVela&&playerChar==='vela')||(!isVela&&playerChar==='glok');
+  if(freezingPlayer){
+    pFrozen=true;clearTimeout(pfTmr);pfTmr=setTimeout(()=>{pFrozen=false;iceEl.style.display='none';},dur);
+  }else{
+    bFrozen=true;clearTimeout(bfTmr);bfTmr=setTimeout(()=>{bFrozen=false;iceEl.style.display='none';},dur);
+  }
 }
 
 /* ════════════════════════
@@ -1282,6 +869,7 @@ function showSpecBnr(txt,cls){
 
 /* ════════════════════════
    VELA SPECIAL: LEAF DRAIN
+   FIX: endGame calls now use dynamic character names
 ════════════════════════ */
 function doVelaSpecial(){
   if(!pSpecReady||pSpecActive||over)return;
@@ -1314,27 +902,27 @@ function _runLeafDrain(velaIsPlayer){
     const si=setInterval(()=>{
       if(over||tk>=5){clearInterval(si);if(velaIsPlayer){pSpecActive=false;schedPSpec();}else{bSpecActive=false;schedBSpec();}return;}
       tk++;const amt=9;
-      if(velaIsPlayer){
-        setHP('glok',glokHP-amt);setHP('vela',Math.min(MAX_HP,velaHP+amt));
-        spawnDmgTxt(glokX/100*window.innerWidth,window.innerHeight*.42,amt,'#f7607a');
-        spawnDmgTxt(velaX/100*window.innerWidth,window.innerHeight*.46,-amt,'#a8edca');
-        spawnColorShards(velaX/100*window.innerWidth+80,window.innerHeight*.55,5,'#a8edca');
-        if(glokHP<=0&&!over)endGame('Vela');
-      }else{
-        setHP('glok',glokHP-amt);setHP('vela',Math.min(MAX_HP,velaHP+amt));
-        spawnDmgTxt(glokX/100*window.innerWidth,window.innerHeight*.42,amt,'#f7a3b8');
-        spawnDmgTxt(velaX/100*window.innerWidth,window.innerHeight*.46,-amt,'#a8edca');
-        spawnColorShards(velaX/100*window.innerWidth+80,window.innerHeight*.55,5,'#a8edca');
-        if(glokHP<=0&&!over)endGame('Vela');
-      }
+      // Leaf Drain: Vela always damages Glok and heals Vela
+      // This is always vela→glok, regardless of player/bot assignment
+      setHP('glok',glokHP-amt);
+      setHP('vela',Math.min(MAX_HP,velaHP+amt));
+      spawnDmgTxt(glokX/100*window.innerWidth,window.innerHeight*.42,amt,'#f7607a');
+      spawnDmgTxt(velaX/100*window.innerWidth,window.innerHeight*.46,-amt,'#a8edca');
+      spawnColorShards(velaX/100*window.innerWidth+80,window.innerHeight*.55,5,'#a8edca');
       playHeal();
-      if(velaHP<=0&&!over)endGame('Glok');
+      // FIX: endGame uses dynamic names
+      if(glokHP<=0&&!over)endGame(playerChar==='vela'?'Vela':getBotName());
+      // Vela dying from leaf drain (edge case: impossible since Vela heals, but guard it)
+      if(velaHP<=0&&!over)endGame(playerChar==='glok'?'Glok':getBotName());
     },600);
   },2000);
 }
 
 /* ════════════════════════
    GLOK SPECIAL: SHADOW RIFT
+   FIX: freezeTarget now correctly freezes Vela (the opponent),
+        endGame uses dynamic winner names,
+        damage always targets Vela (Glok's ability always targets Vela)
 ════════════════════════ */
 function doGlokSpecial(isPlayer){
   if(isPlayer&&(!pSpecReady||pSpecActive||over))return;
@@ -1361,13 +949,20 @@ function doGlokSpecial(isPlayer){
     spawnShards(destPx+40,window.innerHeight*.55,12,true);spawnRing(destPx+40,window.innerHeight*.6,'#dd00ff');
     setTimeout(()=>spawnRing(destPx+40,window.innerHeight*.6,'#ff88ff'),60);
     flashScreen('rgba(180,0,255,0.25)');doShake();
-    freezeTarget(true,500);playFreeze();showStat('❄ FROZEN! Until attack lands! ❄','#a3d4f7');
+    // Shadow Rift always targets Vela (Glok's opponent). freezeTarget(true) = freeze Vela.
+    // FIX: freezeTarget now correctly sets pFrozen vs bFrozen based on playerChar mapping.
+    freezeTarget(true,500);
+    playFreeze();showStat('❄ FROZEN! Until attack lands! ❄','#a3d4f7');
     setTimeout(()=>{
       if(over)return;
-      const dmg=60;setHP('vela',velaHP-dmg);bigFX((velaX+glokX)/2,50);
+      const dmg=60;
+      setHP('vela',velaHP-dmg);
+      bigFX((velaX+glokX)/2,50);
       spawnDmgTxt(velaX/100*window.innerWidth,window.innerHeight*.38,dmg,'#f7a3b8');
-      pFrozen=false;clearTimeout(pfTmr);iceEl.style.display='none';
-      if(velaHP<=0&&!over)endGame('Glok');  // When Vela dies, Glok (the opponent) always wins
+      // Clear freeze manually after damage lands
+      pFrozen=false;bFrozen=false;clearTimeout(pfTmr);clearTimeout(bfTmr);iceEl.style.display='none';
+      // FIX: endGame uses dynamic names — Vela died so Glok wins
+      if(velaHP<=0&&!over)endGame(playerChar==='glok'?getPlayerName():getBotName());
       playHit(true);
     },300);
     setTimeout(()=>{holeEl.style.display='none';},1300);
@@ -1378,7 +973,7 @@ function doGlokSpecial(isPlayer){
 
 function doPlayerSpecial(){
   if(!gameOn||over||!pSpecReady||pSpecActive)return;resumeAudio();
-  if(pChar==='vela')doVelaSpecial();else doGlokSpecial(true);
+  if(playerChar==='vela')doVelaSpecial();else doGlokSpecial(true);
 }
 
 /* ════════════════════════
@@ -1387,42 +982,44 @@ function doPlayerSpecial(){
 function doJump(){
   if(!gameOn||over||pJump||pStam<12||pFrozen)return;
   pJump=true;setSt('p',pStam-12);playDodge();
-  const el=pEl(),sx=pX(),dir=pChar==='vela'?velaDir:glokDir,ex=clamp(sx+dir*18,LEFT,RIGHT);
+  const el=pEl(),sx=pX(),dir=playerChar==='vela'?velaDir:glokDir,ex=clamp(sx+dir*18,LEFT,RIGHT);
   pose(el,'jumping-player');
   const t0=performance.now();
-  (function step(now){const t=Math.min((now-t0)/JUMP_DUR,1),e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,pos=sx+(ex-sx)*e;setPX(clamp(pos,LEFT,RIGHT));if(pChar==='vela')applyVT();else applyGT();if(t<1)requestAnimationFrame(step);else{el.style.animation='';pose(el,'stand');pJump=false;resolveCol();};})(t0);
+  (function step(now){const t=Math.min((now-t0)/JUMP_DUR,1),e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,pos=sx+(ex-sx)*e;setPX(clamp(pos,LEFT,RIGHT));if(playerChar==='vela')applyVT();else applyGT();if(t<1)requestAnimationFrame(step);else{el.style.animation='';pose(el,'stand');pJump=false;resolveCol();};})(t0);
 }
 
 /* ════════════════════════
    PLAYER ATTACK
+   FIX: endGame uses dynamic winner name
 ════════════════════════ */
 function doAttack(){
   if(!gameOn||over||pCD||pFrozen)return;
   if(pStam<14){showStat('Out of stamina! ⚡','#f7d98a');return;}
   resumeAudio();lastPAtk=performance.now();
-  if(pChar==='vela'){playSFX('sfx_wind', 0.65);}else{playSFX('sfx_thunder', 0.65);}
+  if(playerChar==='vela'){playSFX('sfx_wind',0.65);}else{playSFX('sfx_thunder',0.65);}
   const px=pX(),bx=bX(),dist=Math.abs(px-bx);
   if(dist<=ATK_RANGE){
     pCD=true;setSt('p',pStam-ATK_STAM);pose(pEl(),'attack-anim');
-    pEl().src=pChar+'_attack.png';
-    if(pChar==='vela')velaDir=glokX>velaX?1:-1;else glokDir=velaX>glokX?1:-1;
+    pEl().src=playerChar+'_attack.png';
+    if(playerChar==='vela')velaDir=glokX>velaX?1:-1;else glokDir=velaX>glokX?1:-1;
     const hitX=(velaX+glokX)/2;
     if(bDef){
       bDefHits++;if(bDefHits>3){setPH(pH()-5);spawnDmgTxt(px/100*window.innerWidth,window.innerHeight*.44,5,'#f7607a');showStat('Attack penalty! -5 HP 💥','#f7607a');}else showStat('Defended! 🛡','#a3d4f7');
       bigFX(hitX,50);playBlock();spawnDmgTxt(bx/100*window.innerWidth,window.innerHeight*.44,0,'#a3d4f7','BLOCKED!');pose(bEl(),'block');combo=0;
     }else{
       const dmg=DMG_MIN+Math.floor(Math.random()*(DMG_MAX-DMG_MIN+1));setBH(bH()-dmg);
-      bEl().style.setProperty('--kb',pChar==='vela'?glokDir:velaDir);pose(bEl(),'hit');
+      bEl().style.setProperty('--kb',playerChar==='vela'?glokDir:velaDir);pose(bEl(),'hit');
       knockback(bIsVela(),px<bx?1:-1);
       setTimeout(()=>{if(!over)pose(bEl(),'stand');botState='REPOSITION';botSTmr=600;},240);
-      smallFX(bx+2,50,pChar==='vela'?'#a8edca':'#f7a3b8');playHit(dmg>14);
-      spawnDmgTxt(bx/100*window.innerWidth,window.innerHeight*.44,dmg,pChar==='vela'?'#a8edca':'#f7a3b8');
+      smallFX(bx+2,50,playerChar==='vela'?'#a8edca':'#f7a3b8');playHit(dmg>14);
+      spawnDmgTxt(bx/100*window.innerWidth,window.innerHeight*.44,dmg,playerChar==='vela'?'#a8edca':'#f7a3b8');
       combo++;showCombo(combo);clearTimeout(comboTmr);comboTmr=setTimeout(()=>{combo=0;},1800);consHits++;
-      if(bH()<=0&&!over)endGame(pChar==='vela'?'Vela':'Glok');
+      // FIX: winner is the player (bot died)
+      if(bH()<=0&&!over)endGame(getPlayerName());
     }
-    setTimeout(()=>{if(!over){pose(pEl(),'stand');pEl().src=pChar+'.png';}},380);
+    setTimeout(()=>{if(!over){pose(pEl(),'stand');pEl().src=playerChar+'.png';}},380);
     setTimeout(()=>{pCD=false;},ATK_CD);
-  }else{showStat('Too far! 👈','#f7a3b8');combo=0;spawnShards(px/100*window.innerWidth+65*(pChar==='vela'?velaDir:glokDir),window.innerHeight*.52,4,false);}
+  }else{showStat('Too far! 👈','#f7a3b8');combo=0;spawnShards(px/100*window.innerWidth+65*(playerChar==='vela'?velaDir:glokDir),window.innerHeight*.52,4,false);}
 }
 
 /* ════════════════════════
@@ -1430,7 +1027,7 @@ function doAttack(){
 ════════════════════════ */
 function moveP(dir){
   if(!gameOn||over||pDef||pFrozen)return;
-  if(pChar==='vela'){
+  if(playerChar==='vela'){
     velaDir=dir;let nx=clamp(velaX+dir*MOVE_SPD,LEFT,RIGHT);
     if(!pJump&&!bJump){if(dir>0&&velaX<glokX)nx=Math.min(nx,glokX-GAP);if(dir<0&&velaX>glokX)nx=Math.max(nx,glokX+GAP);}
     velaX=clamp(nx,LEFT,RIGHT);velaDir=glokX>velaX?1:-1;pose(velaEl,'walk');applyVT();
@@ -1444,13 +1041,14 @@ function moveP(dir){
 
 /* ════════════════════════
    BOT ATTACK
+   FIX: endGame uses dynamic winner name
 ════════════════════════ */
 function botAtk(){
   if(bCD||bStam<12||bFrozen)return;
   const bv=bIsVela(),bax=bv?velaX:glokX,pax=bv?glokX:velaX;
   if(Math.abs(bax-pax)>ATK_RANGE+2)return;
   bCD=true;
-  if(bv){playSFX('sfx_wind', 0.55);}else{playSFX('sfx_thunder', 0.55);}
+  if(bv){playSFX('sfx_wind',0.55);}else{playSFX('sfx_thunder',0.55);}
   if(bv)velaDir=pax>bax?1:-1;else glokDir=pax>bax?1:-1;
   pose(bEl(),'attack-anim');bEl().src=(bv?'vela':'glok')+'_attack.png';setSt('b',bStam-ATK_STAM);
   const hitX=(velaX+glokX)/2;
@@ -1459,12 +1057,13 @@ function botAtk(){
     bigFX(hitX,50);playBlock();spawnDmgTxt(pax/100*window.innerWidth,window.innerHeight*.44,0,'#f7d98a','BLOCKED!');pose(pEl(),'block');
   }else{
     const dmg=DMG_MIN+Math.floor(Math.random()*(DMG_MAX-DMG_MIN+1));lastBotDmg=dmg;setPH(pH()-dmg);
-    pEl().style.setProperty('--kb',pChar==='vela'?velaDir:glokDir);pose(pEl(),'hit');
-    knockback(pChar==='vela',bax<pax?1:-1);
+    pEl().style.setProperty('--kb',playerChar==='vela'?velaDir:glokDir);pose(pEl(),'hit');
+    knockback(playerChar==='vela',bax<pax?1:-1);
     setTimeout(()=>{if(!over&&!pDef)pose(pEl(),'stand');},240);
     smallFX(pax+2,50,bv?'#a8edca':'#f7607a');playHit(dmg>14);
     spawnDmgTxt(pax/100*window.innerWidth,window.innerHeight*.44,dmg,bv?'#a8edca':'#f7607a');
-    if(pH()<=0&&!over)endGame(bv?'Vela':'Glok');
+    // FIX: winner is the bot (player died)
+    if(pH()<=0&&!over)endGame(getBotName());
   }
   setTimeout(()=>{bCD=false;if(!over){pose(bEl(),'stand');bEl().src=(bv?'vela':'glok')+'.png';}},ATK_CD);
 }
@@ -1554,25 +1153,30 @@ setInterval(()=>{if(!gameOn||over)return;if(pDef)setSt('p',pStam-1.2);},300);
 setInterval(()=>{
   if(!gameOn||over)return;
   setHP('vela',velaHP-.28);setHP('glok',glokHP-.28);
-  if(velaHP<=0&&!over)endGame('Glok');  // When Vela dies from health drain, Glok wins
-  if(glokHP<=0&&!over)endGame('Vela');  // When Glok dies from health drain, Vela wins
+  // FIX: dynamic winner names on health drain death
+  if(velaHP<=0&&!over)endGame(playerChar==='vela'?getBotName():getPlayerName());
+  if(glokHP<=0&&!over)endGame(playerChar==='glok'?getBotName():getPlayerName());
 },900);
 setInterval(()=>{
   if(!gameOn||over||timeLeft<=0)return;timeLeft--;timerEl.textContent=timeLeft;
   if(timeLeft<=12)timerEl.classList.add('urgent');
-  if(timeLeft===0){if(velaHP>glokHP)endGame('Vela');else if(glokHP>velaHP)endGame('Glok');else endGame('Draw');}
+  if(timeLeft===0){
+    if(velaHP>glokHP)endGame('Vela');
+    else if(glokHP>velaHP)endGame('Glok');
+    else endGame('Draw');
+  }
 },1000);
 
 /* ════════════════════════
-   KEYBOARD CONTROLS (laptop)
+   KEYBOARD CONTROLS
 ════════════════════════ */
 const mHeld={l:false,r:false};
 setInterval(()=>{if(over)return;if(mHeld.l)moveP(-1);if(mHeld.r)moveP(1);},80);
 document.addEventListener('keydown',e=>{
   if(!gameOn)return;
   switch(e.key){
-    case'ArrowLeft': mHeld.l=true; moveP(-1); break;
-    case'ArrowRight': mHeld.r=true; moveP(1); break;
+    case'ArrowLeft':mHeld.l=true;moveP(-1);break;
+    case'ArrowRight':mHeld.r=true;moveP(1);break;
     case'ArrowUp':case' ':e.preventDefault();doJump();break;
     case'a':case'A':doAttack();break;
     case'd':case'D':if(!pDef)startDef();break;
@@ -1585,79 +1189,51 @@ document.addEventListener('keyup',e=>{
   if(e.key==='ArrowRight')mHeld.r=false;
 });
 
-/* Laptop special button click */
 document.getElementById('laptopSpecialBtn').addEventListener('click',doPlayerSpecial);
 
 /* ════════════════════════
    PHONE TOUCH CONTROLS
 ════════════════════════ */
-const dpadHeld = { left: false, right: false, jump: false };
-let dpadInterval = null;
-
-function dpadTick(){
-  if(dpadHeld.left) moveP(-1);
-  if(dpadHeld.right) moveP(1);
-}
-
-function setupDpadBtn(id, action){
-  const el = document.getElementById(id);
-  if(!el) return;
-
-  const press = (e) => {
-    e.preventDefault();
-    resumeAudio();
-    if(action === 'left'){
-      dpadHeld.left = true;
-      el.classList.add('pressed');
-      if(!dpadInterval) dpadInterval = setInterval(dpadTick, 80);
-    } else if(action === 'right'){
-      dpadHeld.right = true;
-      el.classList.add('pressed');
-      if(!dpadInterval) dpadInterval = setInterval(dpadTick, 80);
-    } else if(action === 'jump'){
-      el.classList.add('pressed');
-      doJump();
-    }
+const dpadHeld={left:false,right:false};
+let dpadInterval=null;
+function dpadTick(){if(dpadHeld.left)moveP(-1);if(dpadHeld.right)moveP(1);}
+function setupDpadBtn(id,action){
+  const el=document.getElementById(id);if(!el)return;
+  const press=(e)=>{
+    e.preventDefault();resumeAudio();
+    if(action==='left'){dpadHeld.left=true;el.classList.add('pressed');if(!dpadInterval)dpadInterval=setInterval(dpadTick,80);}
+    else if(action==='right'){dpadHeld.right=true;el.classList.add('pressed');if(!dpadInterval)dpadInterval=setInterval(dpadTick,80);}
+    else if(action==='jump'){el.classList.add('pressed');doJump();}
   };
-
-  const release = (e) => {
+  const release=(e)=>{
     el.classList.remove('pressed');
-    if(action === 'left'){
-      dpadHeld.left = false;
-      if(!dpadHeld.left && !dpadHeld.right){ clearInterval(dpadInterval); dpadInterval=null; }
-    } else if(action === 'right'){
-      dpadHeld.right = false;
-      if(!dpadHeld.left && !dpadHeld.right){ clearInterval(dpadInterval); dpadInterval=null; }
-    }
+    if(action==='left'){dpadHeld.left=false;if(!dpadHeld.left&&!dpadHeld.right){clearInterval(dpadInterval);dpadInterval=null;}}
+    else if(action==='right'){dpadHeld.right=false;if(!dpadHeld.left&&!dpadHeld.right){clearInterval(dpadInterval);dpadInterval=null;}}
   };
-
-  el.addEventListener('touchstart', press, {passive:false});
-  el.addEventListener('touchend', release);
-  el.addEventListener('touchcancel', release);
-  el.addEventListener('mousedown', press);
-  el.addEventListener('mouseup', release);
-  el.addEventListener('mouseleave', release);
+  el.addEventListener('touchstart',press,{passive:false});
+  el.addEventListener('touchend',release);
+  el.addEventListener('touchcancel',release);
+  el.addEventListener('mousedown',press);
+  el.addEventListener('mouseup',release);
+  el.addEventListener('mouseleave',release);
 }
+setupDpadBtn('dpadLeft','left');
+setupDpadBtn('dpadRight','right');
+setupDpadBtn('dpadUp','jump');
 
-setupDpadBtn('dpadLeft', 'left');
-setupDpadBtn('dpadRight', 'right');
-setupDpadBtn('dpadUp', 'jump');
-
-function setupActionBtn(id, downFn, upFn){
-  const el = document.getElementById(id);
-  if(!el) return;
-  const onDown = (e) => { e.preventDefault(); resumeAudio(); downFn(); };
-  const onUp = (e) => { if(upFn) upFn(); };
-  el.addEventListener('touchstart', onDown, {passive:false});
-  el.addEventListener('touchend', onUp);
-  el.addEventListener('touchcancel', onUp);
-  el.addEventListener('mousedown', onDown);
-  el.addEventListener('mouseup', onUp);
+function setupActionBtn(id,downFn,upFn){
+  const el=document.getElementById(id);if(!el)return;
+  const onDown=(e)=>{e.preventDefault();resumeAudio();downFn();};
+  const onUp=(e)=>{if(upFn)upFn();};
+  el.addEventListener('touchstart',onDown,{passive:false});
+  el.addEventListener('touchend',onUp);
+  el.addEventListener('touchcancel',onUp);
+  el.addEventListener('mousedown',onDown);
+  el.addEventListener('mouseup',onUp);
 }
-
-setupActionBtn('phoneAttackBtn', doAttack, null);
-setupActionBtn('phoneDefendBtn', startDef, stopDef);
-setupActionBtn('phoneSpecialBtn', doPlayerSpecial, null);
+setupActionBtn('phoneAttackBtn',doAttack,null);
+setupActionBtn('phoneDefendBtn',startDef,stopDef);
+setupActionBtn('phoneSpecialBtn',doPlayerSpecial,null);
 </script>
 </body>
 </html>
